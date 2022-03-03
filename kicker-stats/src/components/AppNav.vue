@@ -10,9 +10,11 @@
             </template>
         </v-list>
     </v-navigation-drawer>
-    <v-app-bar color='light-blue accent-4' dense app>
+    <v-app-bar color='green darken-3' dense app>
         <v-app-bar-nav-icon class='hidden-md-and-up' @click='drawer = !drawer'></v-app-bar-nav-icon>
-        <v-img src='@/assets/donut.png' max-width=40></v-img>
+        <router-link to='/'>
+        <v-img src='@/assets/football.png' max-width=40></v-img>
+        </router-link>
         <router-link to='/'>
         <v-app-bar-title>BigMacs Sports Stats</v-app-bar-title>
         </router-link>
@@ -20,12 +22,13 @@
         <v-btn to='/' class='hidden-sm-and-down' plain>Home</v-btn>
         <v-btn to='/top10' class='hidden-sm-and-down' plain>Top 10</v-btn>
         <v-btn to='/search' class='hidden-sm-and-down' plain>Search</v-btn>
+        <v-btn to='/probabilities' class='hidden-sm-and-down' plain>Probabilities</v-btn>
     </v-app-bar>
 </span>
 </template>
 <script>
 export default ({
-    name: 'Nav',
+    name: 'AppNav',
     data() {
         return {
             drawer: false,
@@ -41,7 +44,7 @@ export default ({
 </script>
 <style scoped>
 a, a:visited {
-    color: black;
+    color: white;
     text-decoration: none;
     margin-left: 10px;
 }

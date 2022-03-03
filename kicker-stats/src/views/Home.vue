@@ -1,13 +1,12 @@
 <template>
     <span>
-        <Nav></Nav>
+        hello
     </span>
 </template>
 <script>
-import Nav from '@/components/Nav.vue'
 
 export default ({
     name: 'Home',
-    components: { Nav }
+    components: {  }
 })
 </script>
