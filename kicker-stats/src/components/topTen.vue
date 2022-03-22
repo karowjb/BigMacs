@@ -25,11 +25,12 @@
             ></v-col
           >
           <v-col cols="12" sm="6" md="12">
-            <v-card><v-input></v-input></v-card>
+            <v-card><v-input>Temp</v-input></v-card>
           </v-col>
         </v-row>
       </v-container>
     </v-form>
+    <v-footer color="green darken-3">Contact info</v-footer>
   </div>
 </template>
 
