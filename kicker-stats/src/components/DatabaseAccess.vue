@@ -4,8 +4,8 @@
     <v-form>
       <v-container>
         <v-row>
-          <v-col cols="12" sm="6" md="12"
-            ><v-card-title>Searching</v-card-title
+          <v-col cols="12" sm="6" md="12">
+            <v-card-title>Searching</v-card-title
             ><v-card-text
               >Please fill in the questions below to select the data you are
               looking for.</v-card-text

@@ -8,7 +8,6 @@
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Purus viverra accumsan in nisl nisi scelerisque eu. Sed ullamcorper morbi tincidunt ornare massa eget. Mauris commodo quis imperdiet massa tincidunt. Id velit ut tortor pretium. Egestas erat imperdiet sed euismod nisi. Proin libero nunc consequat interdum varius. Felis imperdiet proin fermentum leo vel orci. Viverra aliquet eget sit amet tellus cras adipiscing. Amet nisl purus in mollis. In egestas erat imperdiet sed euismod nisi porta lorem mollis.
             </p>
         </div>
-        
     </span>
 </template>
 <script>
@@ -26,5 +25,6 @@ export default ({
 .paragraph h2 {
     margin-bottom: 10px;
     color: #555555;
+    max-height: 100vh;
 }
 </style>
