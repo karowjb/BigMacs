@@ -1,8 +1,8 @@
 <template  class="background">
-  <div class="fieldImage">
+  <span>
     <v-banner id="topTitle">Top Ten Kickers</v-banner>
-    <v-form>
-      <v-container>
+    <v-container fill-height fluid class="fieldImage">
+      <v-form>
         <v-row>
           <v-col cols="12" sm="6" md="12"
             ><v-card-title>Searching</v-card-title
@@ -28,10 +28,10 @@
             <v-card><v-input>Temp</v-input></v-card>
           </v-col>
         </v-row>
-      </v-container>
-    </v-form>
+      </v-form>
+    </v-container>
     <v-footer color="green darken-3">Contact info</v-footer>
-  </div>
+  </span>
 </template>
 
 <script>
@@ -49,12 +49,18 @@ export default {
 }
 form {
   background-color: #2e7d32;
-  margin: 50px;
+  margin-left: 15%;
+  margin-right: 15%;
   border-radius: 3%;
+  padding: 5px;
   border-color: white;
   border-width: 3px;
 }
 .fieldImage {
   background-image: url("../assets/footballField.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  max-height: 100vh;
 }
 </style>
