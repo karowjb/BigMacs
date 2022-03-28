@@ -5,18 +5,15 @@
       <v-container>
         <v-row>
           <v-col cols="12" sm="6" md="12">
-            <v-card-title>Searching</v-card-title
-            ><v-card-text
-              >Please fill in the questions below to select the data you are
-              looking for.</v-card-text
-            ></v-col
-          >
+            <v-card-title>Searching</v-card-title>
+            <v-card-text>Please fill in the questions below to select the data you arelooking for.</v-card-text>
+            </v-col>
           <v-col cols="12" sm="6" md="12">
-            <v-text-field label="Favorite Kicker"></v-text-field
-          ></v-col>
+            <v-text-field label="Favorite Kicker"></v-text-field>
+            </v-col>
           <v-col cols="12" sm="6" md="12">
-            <v-text-field label="What season?"></v-text-field
-          ></v-col>
+            <v-text-field label="What season?"></v-text-field>
+            </v-col>
           <v-col cols="12" sm="6" md="12"> </v-col>
           <v-col cols="12" sm="6" md="12">
             <v-card><v-input>Temp</v-input></v-card>
