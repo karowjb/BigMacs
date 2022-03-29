@@ -2,7 +2,7 @@
   <span>
     <v-banner id="topTitle">Top Ten Kickers</v-banner>
     <v-container fill-height fluid class="fieldImage">
-      <v-form>
+      <v-form id="search">
         <v-row>
           <v-col cols="12" sm="6" md="12"
             ><v-card-title>Searching</v-card-title
@@ -29,6 +29,22 @@
           </v-col>
         </v-row>
       </v-form>
+      <v-container id="result">
+        <v-simple-table>This is a table</v-simple-table>
+        <br />
+        <v-list>
+          <v-list-item>One</v-list-item>
+          <v-list-item>Two</v-list-item>
+          <v-list-item>Three</v-list-item>
+          <v-list-item>Four</v-list-item>
+          <v-list-item>Five</v-list-item>
+          <v-list-item>Six</v-list-item>
+          <v-list-item>Seven</v-list-item>
+          <v-list-item>Eight</v-list-item>
+          <v-list-item>Nine</v-list-item>
+          <v-list-item>Ten</v-list-item>
+        </v-list>
+      </v-container>
     </v-container>
     <v-footer color="green darken-3">Contact info</v-footer>
   </span>
@@ -40,6 +56,16 @@ export default {
 };
 </script>
 <style scoped>
+#search {
+  width: 50%;
+  height: 100%;
+}
+#result {
+  width: 50%;
+  height: 100%;
+  padding: 5px;
+  background-color: #2e7d32;
+}
 #topTitle {
   color: white;
   font-size: px;
@@ -49,9 +75,9 @@ export default {
 }
 form {
   background-color: #2e7d32;
-  margin-left: 15%;
+  /* margin-left: 15%;
   margin-right: 15%;
-  border-radius: 3%;
+  border-radius: 3%; */
   padding: 5px;
   border-color: white;
   border-width: 3px;

@@ -2,7 +2,7 @@
   <span>
     <v-banner id="topTitle">Search Database</v-banner>
     <v-container fill-height fluid class="fieldImage">
-      <v-form>
+      <v-form id="form">
         <v-row>
           <v-col cols="12" sm="6" md="12">
             <v-card-title>Searching</v-card-title>
@@ -12,17 +12,21 @@
             >
           </v-col>
           <v-col cols="12" sm="6" md="12">
-            <v-text-field label="Favorite Kicker"></v-text-field>
+            <v-text-field label="Favorite Kicker" color="white"></v-text-field>
           </v-col>
           <v-col cols="12" sm="6" md="12">
-            <v-text-field label="What season?"></v-text-field>
+            <v-text-field label="What season?" color="white"></v-text-field>
           </v-col>
           <v-col cols="12" sm="6" md="12"> </v-col>
-          <v-col cols="12" sm="6" md="12">
+          <!-- <v-col cols="12" sm="6" md="12">
             <v-card><v-input>Temp</v-input></v-card>
-          </v-col>
+          </v-col> -->
         </v-row>
       </v-form>
+      <v-container id="list">
+        <v-card-title>List of Kickers</v-card-title>
+        <v-data-table> </v-data-table>
+      </v-container>
     </v-container>
 
     <v-footer color="green darken-3">Contact info</v-footer>
@@ -35,6 +39,19 @@ export default {
 };
 </script>
 <style scoped>
+#list {
+  width: 50%;
+  height: 100%;
+  background-color: #2e7d32;
+  color: white;
+  border: solid 3px white;
+}
+#form {
+  width: 50%;
+  height: 100%;
+  color: white;
+  border: solid 3px white;
+}
 #topTitle {
   color: white;
   font-size: px;
@@ -44,12 +61,12 @@ export default {
 }
 form {
   background-color: #2e7d32;
-  margin-left: 15%;
+  /* margin-left: 15%;
   margin-right: 15%;
-  border-radius: 3%;
+  border-radius: 3%; */
   padding: 5px;
-  border-color: white;
-  border-width: 3px;
+  /* border-color: white;
+  border-width: 3px; */
 }
 .fieldImage {
   background-image: url("../assets/footballField.jpg");
