@@ -10,7 +10,7 @@
         </template>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar color="green darken-3" dense app>
+    <v-app-bar class='nav' color="green darken-3" dense app>
       <v-app-bar-nav-icon
         class="hidden-md-and-up"
         @click="drawer = !drawer"
@@ -25,9 +25,7 @@
       <v-btn to="/" class="hidden-sm-and-down" plain>Home</v-btn>
       <v-btn to="/top10" class="hidden-sm-and-down" plain>Top 10</v-btn>
       <v-btn to="/search" class="hidden-sm-and-down" plain>Search</v-btn>
-      <v-btn to="/probabilities" class="hidden-sm-and-down" plain
-        >Probabilities</v-btn
-      >
+      <v-btn to="/probabilities" class="hidden-sm-and-down" plain>Probabilities</v-btn>
     </v-app-bar>
   </span>
 </template>

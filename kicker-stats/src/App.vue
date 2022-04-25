@@ -31,3 +31,6 @@ export default ({
   vuetify,
 })
 </script>
+<style scoped>
+
+</style>
