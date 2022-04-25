@@ -10,7 +10,7 @@
         </template>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar class='nav' color="green darken-3" dense app>
+    <v-app-bar class='nav' color="#ecebf1" dense app>
       <v-app-bar-nav-icon
         class="hidden-md-and-up"
         @click="drawer = !drawer"
@@ -19,7 +19,7 @@
         <v-img src="@/assets/football.png" max-width="40"></v-img>
       </router-link>
       <router-link to="/">
-        <v-app-bar-title>BigMacs Sports Stats</v-app-bar-title>
+        <v-app-bar-title color='secondary'>BigMacs Sports Stats</v-app-bar-title>
       </router-link>
       <v-spacer></v-spacer>
       <v-btn to="/" class="hidden-sm-and-down" plain>Home</v-btn>
@@ -48,8 +48,9 @@ export default {
 <style scoped>
 a,
 a:visited {
-  color: white;
   text-decoration: none;
   margin-left: 10px;
+  font-weight: 500;
 }
+
 </style>
