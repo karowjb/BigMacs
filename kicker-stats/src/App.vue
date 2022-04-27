@@ -14,10 +14,11 @@ const vuetify = new Vuetify({
   theme: {
     themes: {
       light: {
-        primary: '#3f51b5',
-        secondary: '#b0bec5',
-        accent: '#8c9eff',
+        primary: '#ecebf1',
+        secondary: '#1f1e1f',
+        accent: '#399c59',
         error: '#b71c1c',
+        anchor: '#1f1e1f',
       },
     },
   },
@@ -31,3 +32,6 @@ export default ({
   vuetify,
 })
 </script>
+<style scoped>
+
+</style>
