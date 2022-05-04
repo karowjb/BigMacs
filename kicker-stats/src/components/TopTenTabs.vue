@@ -4,11 +4,7 @@
             <v-tab v-for="tab in tabs" :key="tab.name">{{tab.name}}</v-tab>
             <v-tab-item v-for="table in tables" :key="table.id">
                 <v-card flat>
-                    <v-data-table
-                        :headers="headers"
-                        :items="desserts"
-                        hide-default-footer
-                    ></v-data-table>
+                    <v-data-table :headers="headers" :items="desserts" hide-default-footer></v-data-table>
                 </v-card>
             </v-tab-item>
         </v-tabs>

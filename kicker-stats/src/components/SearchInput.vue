@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  name: "Searching",
+  name: "SearchInput",
 };
 </script>
 <style scoped>
