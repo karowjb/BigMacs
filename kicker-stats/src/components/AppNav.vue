@@ -1,6 +1,6 @@
 <template>
   <span>
-    <v-navigation-drawer app v-model="drawer">
+    <v-navigation-drawer app v-model="drawer" dark>
       <v-list>
         <template v-for="(link, index) in pages">
           <v-list-item :key="index" :to="link.url">

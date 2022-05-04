@@ -20,9 +20,15 @@ const vuetify = new Vuetify({
         error: '#b71c1c',
         anchor: '#1f1e1f',
       },
+      dark: {
+        primary: '#1f1e1f',
+        secondary: '#399c59',
+        accent: '#ecebf1',
+      },
     },
   },
 })
+
 
 export default ({
   name: "App",
@@ -32,6 +38,10 @@ export default ({
   vuetify,
 })
 </script>
-<style scoped>
-
+<style>
+:root {
+  --main-bg: #ecebf1;
+  --main-text: #1f1e1f;
+  --main-accent: #399c59;
+}
 </style>
