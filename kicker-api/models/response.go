@@ -1,7 +1,7 @@
 package model
 
 type JsonSearchResponse struct {
-	Type String `json:"type"`
+	Type string `json:"type"`
 }
 
 type JsonTopKicker struct {
@@ -32,4 +32,10 @@ type JsonFieldgoalStats struct {
 	Type string `json:"type"`
 	Message string `json:"message"`
 	Data []KickerFieldGoal `json:"data"`
+}
+
+type JsonResponseAllKickers struct {
+	Type string `json:"type"`
+	Message string `json:"message"`
+	Data []KickerInfo `json:"data"`
 }
