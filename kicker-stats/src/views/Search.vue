@@ -1,12 +1,12 @@
 <template>
-  <Searching></Searching>
+  <SearchInput></SearchInput>
 </template>
 <script>
-import Searching from "@/components/DatabaseAccess.vue";
+import SearchInput from "@/components/SearchInput.vue";
 export default {
   name: "Search",
   components: {
-    Searching,
+    SearchInput,
   },
 };
 </script>

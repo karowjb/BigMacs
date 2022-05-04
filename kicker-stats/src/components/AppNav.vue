@@ -4,7 +4,7 @@
       <v-list>
         <template v-for="(link, index) in pages">
           <v-list-item :key="index" :to="link.url">
-            <v-list-item-content>{{ link.title }}</v-list-item-content>
+            <v-list-item-content>{{ link.link }}</v-list-item-content>
           </v-list-item>
           <v-divider :key="`div-${index}`"></v-divider>
         </template>
