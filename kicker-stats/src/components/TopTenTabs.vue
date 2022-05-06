@@ -11,13 +11,17 @@
     </v-card>
 </template>
 <script>
+
+//get tables from api
+
 export default ({
     name: 'TopTenTabs',
     data() {
-        return { tabs: [
-            {name: 'Field Goals Made'},
-            {name: 'Single Yardage'},
-            {name: 'Extra Points Made'}
+        return { 
+            tabs: [
+                {name: 'Field Goals Made'},
+                {name: 'Single Yardage'},
+                {name: 'Extra Points Made'}
             ],
             tables: [
                 {table: 'table1', id: 0},
@@ -26,7 +30,7 @@ export default ({
             ],
             headers: [
                 { text: '#', sortable: false, value: 'index'},
-                { text: 'Name', align: 'start', sortable: false, value: 'name'},
+                { text: 'Name', align: 'start', sortable: false, value: 'name' },
                 { text: 'Jersey Number', sortable: false, value: 'jerseyNum' },
                 { text: 'Team (Current)', sortable: false, value: 'team' },
                 { text: 'Field Goals Made', sortable: false, value: 'fieldGoals' },
