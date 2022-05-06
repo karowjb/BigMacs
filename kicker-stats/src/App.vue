@@ -44,4 +44,7 @@ export default ({
   --main-text: #1f1e1f;
   --main-accent: #399c59;
 }
+.mainbg {
+  background-image: linear-gradient(180deg, rgba(1,35,37,1) 0%, rgba(236,235,241,1) 100%);
+}
 </style>

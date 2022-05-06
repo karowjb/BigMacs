@@ -1,78 +1,77 @@
-<template  class="background">
-  <span>
-    <v-banner id="topTitle">Search Database</v-banner>
-    <v-container fill-height fluid class="fieldImage">
-      <v-form id="form">
-        <v-row>
-          <v-col cols="12" sm="6" md="12">
-            <v-card-title>Searching</v-card-title>
-            <v-card-text
-              >Please fill in the questions below to select the data you
-              arelooking for.</v-card-text
-            >
-          </v-col>
-          <v-col cols="12" sm="6" md="12">
-            <v-text-field label="Favorite Kicker" color="white"></v-text-field>
-          </v-col>
-          <v-col cols="12" sm="6" md="12">
-            <v-text-field label="What season?" color="white"></v-text-field>
-          </v-col>
-          <v-col cols="12" sm="6" md="12"> </v-col>
-          <!-- <v-col cols="12" sm="6" md="12">
-            <v-card><v-input>Temp</v-input></v-card>
-          </v-col> -->
-        </v-row>
+<template>
+  <v-card>
+    <v-card-text>
+      <v-form>
+        <v-text-field v-model="playerName" label="Name">
+        </v-text-field>
+        <v-select v-model="team"
+          :items="teams"
+          label="Team"
+        ></v-select>
+        <v-range-slider
+          v-model="heightRange"
+          :min="48"
+          :max="100"
+          class="align-center"
+          ><template v-slot:prepend>
+              <v-text-field
+                :value="heightRange[0]"
+                class="mt-0 pt-0"
+                hide-details
+                single-line
+                type="number"
+                style="width: 60px"
+                @change="$set(heightRange, 0, $event)"
+              ></v-text-field>
+            </template>
+            <template v-slot:append>
+              <v-text-field
+                :value="heightRange[1]"
+                class="mt-0 pt-0"
+                hide-details
+                single-line
+                type="number"
+                style="width: 60px"
+                @change="$set(range, 1, $event)"
+              ></v-text-field>
+            </template>
+        </v-range-slider>
+        <v-slider
+          v-model="weight"
+          :min="150"
+          :max="300"
+          label="Weight (lb)"
+          class="align-center"
+          ><template v-slot:append>
+            <v-text-field
+              v-model="weight"
+              class="mt-0 pt-0"
+              type="number"
+              style="width: 60px"
+            ></v-text-field>
+          </template>
+        </v-slider>
+        <v-btn>Search</v-btn>
+        <v-btn>Reset</v-btn>
       </v-form>
-      <v-container id="list">
-        <v-card-title>List of Kickers</v-card-title>
-        <v-data-table> </v-data-table>
-      </v-container>
-    </v-container>
-
-    <v-footer color="green darken-3">Contact info</v-footer>
-  </span>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
 export default {
   name: "SearchInput",
+  data() {
+    return {
+      teams: ['Falcons'],
+      team: '',
+      playerName: '',
+      heightRange: [48, 100],
+    }
+  }
+  //get teams from api
 };
 </script>
 <style scoped>
-#list {
-  width: 50%;
-  height: 100%;
-  background-color: #2e7d32;
-  color: white;
-  border: solid 3px white;
-}
-#form {
-  width: 50%;
-  height: 100%;
-  color: white;
-  border: solid 3px white;
-}
-#topTitle {
-  color: white;
-  font-size: px;
-  background-color: #4e342e;
-  padding-top: 10px;
-  text-align: center;
-}
-form {
-  background-color: #2e7d32;
-  /* margin-left: 15%;
-  margin-right: 15%;
-  border-radius: 3%; */
-  padding: 5px;
-  /* border-color: white;
-  border-width: 3px; */
-}
-.fieldImage {
-  background-image: url("../assets/footballField.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  max-height: 100vh;
-}
+
 </style>
