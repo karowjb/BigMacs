@@ -1,12 +1,21 @@
 <template>
-  <probability></probability>
+<span>
+  <PageHeader header="- Probabilities -"></PageHeader>
+  <div class='mainbg'>
+    <v-container>
+      <ProbabilityInput></ProbabilityInput>
+    </v-container>
+  </div>
+</span>
 </template>
 <script>
-import Probability from "@/components/Probability.vue";
+import PageHeader from "@/components/PageHeader.vue";
+import ProbabilityInput from "@/components/ProbabilityInput.vue";
 export default {
-  name: "Probs",
+  name: "Probabilities",
   components: {
-    Probability,
+    ProbabilityInput,
+    PageHeader,
   },
 };
 </script>

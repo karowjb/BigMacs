@@ -12,6 +12,9 @@
           v-model="heightRange"
           :min="48"
           :max="100"
+          :color="blue"
+          :track-color="primary"
+          label="Height"
           class="align-center"
           ><template v-slot:prepend>
               <v-text-field
@@ -63,11 +66,14 @@ export default {
   name: "SearchInput",
   data() {
     return {
-      teams: ['Falcons'],
+      teams: [],
       team: '',
       playerName: '',
       heightRange: [48, 100],
     }
+  },
+  methods: {
+    
   }
   //get teams from api
 };
