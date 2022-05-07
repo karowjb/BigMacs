@@ -13,8 +13,8 @@
 <script>
 import axios from 'axios';
 const fgURL = 'http://localhost:8000/toptenfg';
-const lfgURL = 'http://localhost:8000/toptenyardage';
-const epmURL = 'http://localhost:8000/toptenepm';
+const lfgURL = 'http://localhost:8000/toptenlongestfg';
+const kieURL = 'http://localhost:8000/toptenkintoendzone';
 
 export default ({
     name: 'TopTenTabs',
@@ -23,7 +23,7 @@ export default ({
             tabs: [
                 {name: 'Field Goals Made'},
                 {name: 'Longest Field Goal'},
-                {name: 'Extra Points Made'}
+                {name: 'Kickoffs Into Endzone'}
             ],
             tables: [],
             headers: [
@@ -31,9 +31,9 @@ export default ({
                 { text: 'Name', align: 'start', sortable: false, value: 'name' },
                 { text: 'Jersey Number', align: 'center', sortable: false, value: 'jerseyNum' },
                 { text: 'Team (Current)', sortable: false, value: 'team' },
-                { text: 'Field Goals Made', align: 'center', sortable: false, value: 'fieldGoals' },
-                { text: 'Longest Field Goal (yd)', align: 'center', sortable: false, value: 'longest' },
-                { text: 'Extra Points Made', sortable: false, value: 'extraPoints' },
+                { text: 'Field Goals Made', align: 'center', sortable: false, value: 'fieldGoalsMade' },
+                { text: 'Longest Field Goal (yd)', align: 'center', sortable: false, value: 'longestFG' },
+                { text: 'Kickoffs Into Endzone', align: 'center', sortable: false, value: 'kickoffsEndzone' },
                 { text: 'Year', align: 'center', sortable: false, value: 'year' },
             ]
         }
@@ -44,7 +44,6 @@ export default ({
             const response1 = await axios.post(fgURL);
             let respTable1 = response1.data.data;
             let fgtable = [];
-            console.log(respTable1);
             let index = 1;
             respTable1.forEach(entry => {
                 let newData = {
@@ -52,22 +51,20 @@ export default ({
                     'name': entry.kickerfirstname + ' ' + entry.kickerlastname,
                     'jerseyNum': entry.jerseynum,
                     'team': entry.teamlocation + ' ' + entry.teamname,
-                    'fieldGoals': entry.fieldgoalsmade,
-                    'longest': entry.longestfieldgoal,
-                    'extraPoints': 'Loading...',
+                    'fieldGoalsMade': entry.fieldgoalsmade,
+                    'longestFG': entry.longestfieldgoal,
+                    'kickoffsEndzone': entry.endzonekickoffs,
                     'year': entry.seasonyear
                 }
                 fgtable.push(newData);
                 ++index;
             });
-            console.log(fgtable);
             this.tables.push(fgtable);
 
-            //get table by single yardage
+            //get table by longest fg
             const response2 = await axios.post(lfgURL);
             let respTable2 = response2.data.data;
             let lfgtable = [];
-            console.log(respTable2);
             index = 1;
             respTable2.forEach(entry => {
                 let newData = {
@@ -75,21 +72,39 @@ export default ({
                     'name': entry.kickerfirstname + ' ' + entry.kickerlastname,
                     'jerseyNum': entry.jerseynum,
                     'team': entry.teamlocation + ' ' + entry.teamname,
-                    'fieldGoals': entry.fieldgoalsmade,
-                    'longest': 'Loading...',
-                    'extraPoints': 'Loading...',
+                    'fieldGoalsMade': entry.fieldgoalsmade,
+                    'longestFG': entry.longestfieldgoal,
+                    'kickoffsEndzone': entry.endzonekickoffs,
                     'year': entry.seasonyear
                 }
                 lfgtable.push(newData);
                 ++index;
             });
+            // console.log(lfgtable);
             this.tables.push(lfgtable);
 
-            //get tables by estra points made
-            const response3 = await axios.post(epmURL);
-            let epmtable = response3.data.data;
-            this.tables.push(epmtable);
-
+            //get tables by kickoffs into endzone
+            const response3 = await axios.post(kieURL);
+            let respTable3 = response3.data.data;
+            let kietable = [];
+            console.log(kietable);
+            index = 1;
+            respTable3.forEach(entry => {
+                let newData = {
+                    'index': index,
+                    'name': entry.kickerfirstname + ' ' + entry.kickerlastname,
+                    'jerseyNum': entry.jerseynum,
+                    'team': entry.teamlocation + ' ' + entry.teamname,
+                    'fieldGoalsMade': entry.fieldgoalsmade,
+                    'longestFG': entry.longestfieldgoal,
+                    'kickoffsEndzone': entry.endzonekickoffs,
+                    'year': entry.seasonyear
+                }
+                kietable.push(newData);
+                ++index;
+            });
+            console.log(kietable);
+            this.tables.push(kietable);
         } catch(e) {
             console.log(e);
         }

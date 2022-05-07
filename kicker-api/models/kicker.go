@@ -61,7 +61,22 @@ type KickerSeason struct {
 	Xp_blocked               int    `json:"xpblocked"`
 }
 
-type TopKickerFG struct {
+// type TopKickerFG struct {
+// 	First_name             string `json:"kickerfirstname"`
+// 	Last_name              string `json:"kickerlastname"`
+// 	Jersey_number		   int    `json:"jerseynum"`
+// 	Team_id                string `json:"teamid"`
+// 	Team_name			   string `json:"teamname"`
+// 	Team_location          string `json:"teamlocation"`
+// 	Fieldgoals_made        int    `json:"fieldgoalsmade"`
+// 	Fieldgoal_longest	   int    `json:"longestfieldgoal"`
+// 	Season_year            int    `json:"seasonyear"`
+// 	// Kickoffs_endzone       int    `json:"kickoffsendzone"`
+// 	// Kickoffs_inside_twenty int    `json:"kickoffsinsidetwenty"`
+// 	// Games_played           int    `json:"gamesplayed"`
+// 	// Games_started          int    `json:"gamesstarted"`
+// }
+type TopKickers struct {
 	First_name             string `json:"kickerfirstname"`
 	Last_name              string `json:"kickerlastname"`
 	Jersey_number		   int    `json:"jerseynum"`
@@ -70,23 +85,8 @@ type TopKickerFG struct {
 	Team_location          string `json:"teamlocation"`
 	Fieldgoals_made        int    `json:"fieldgoalsmade"`
 	Fieldgoal_longest	   int    `json:"longestfieldgoal"`
+	Kickoffs_endzone       int    `json:"endzonekickoffs"`
 	Season_year            int    `json:"seasonyear"`
-	// Kickoffs_endzone       int    `json:"kickoffsendzone"`
-	// Kickoffs_inside_twenty int    `json:"kickoffsinsidetwenty"`
-	// Games_played           int    `json:"gamesplayed"`
-	// Games_started          int    `json:"gamesstarted"`
-	
-}
-type TopKickerLongestFG struct {
-	First_name             string `json:"kickerfirstname"`
-	Last_name              string `json:"kickerlastname"`
-	Kickoffs               int    `json:"kickoffs"`
-	Kickoffs_yards         int    `json:"kickoffsyards"`
-	Season_year            int    `json:"seasonyear"`
-	Kickoffs_endzone       int    `json:"kickoffsendzone"`
-	Kickoffs_inside_twenty int    `json:"kickoffsinsidetwenty"`
-	Games_played           int    `json:"gamesplayed"`
-	Games_started          int    `json:"gamesstarted"`
 }
 
 type PlayerProfile struct {

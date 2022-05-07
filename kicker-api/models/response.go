@@ -8,16 +8,16 @@ type JsonTeam struct {
 	Message string `json:"message"`
 	Data    []Team `json:"data"`
 }
-type JsonTopKickerFG struct {
+type JsonTopKickers struct {
 	Type    string        `json:"type"`
 	Message string        `json:"message"`
-	Data    []TopKickerFG `json:"data"`
+	Data    []TopKickers `json:"data"`
 }
-type JsonTopKickerLongestFG struct {
-	Type    string       `json:"type"`
-	Message string       `json:"message"`
-	Data    []TopKickerLongestFG `json:"data"`
-}
+// type JsonTopKickerLongestFG struct {
+// 	Type    string       `json:"type"`
+// 	Message string       `json:"message"`
+// 	Data    []TopKickerLongestFG `json:"data"`
+// }
 
 type JsonSearchResult struct {
 	Type    string           `json:"type"`
