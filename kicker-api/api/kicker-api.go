@@ -35,7 +35,7 @@ func main() {
 
 	//Router request paths
 	router.HandleFunc("/toptenfg", GetTopTenFG).Methods(http.MethodPost, http.MethodOptions)
-	router.HandleFunc("/toptenkick", GetTopTenK).Methods(http.MethodPost, http.MethodOptions)
+	router.HandleFunc("/toptenyardage", GetTopTenK).Methods(http.MethodPost, http.MethodOptions)
 	router.HandleFunc("/searchplayers", GetPlayer).Methods(http.MethodPost, http.MethodOptions)
 	router.HandleFunc("/probfieldgoal", GetProbabilityFieldgoal).Methods(http.MethodPost, http.MethodOptions)
 	router.HandleFunc("/probkickoff", GetProbabilityKickoff).Methods(http.MethodPost, http.MethodOptions)

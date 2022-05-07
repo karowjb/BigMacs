@@ -149,6 +149,11 @@ type KickerInfo struct {
 type GetPlayer struct {
 	First_name string `json:"kickerfirstname"`
 	Last_name  string `json:"kickerlastname"`
+	Team_id string `json:"kickerteamid"`
+	HeightMin int `json:"kickerheightmin"`
+	HeightMax int `json:"kickerheightmax"`
+	WeightMin int `json:"kickerweightmin"`
+	WeightMax int `json:"kickerweightmax"`
 }
 type GetParameters struct {
 	Fieldgoals_made int `json:"fieldgoals_made"`

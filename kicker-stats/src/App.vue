@@ -16,7 +16,10 @@ const vuetify = new Vuetify({
       light: {
         primary: '#ecebf1',
         secondary: '#1f1e1f',
+        // primary: '#1f1e1f',
+        // secondary: '#ecebf1',
         accent: '#399c59',
+        darkgreen: '#003a38',
         error: '#b71c1c',
         anchor: '#1f1e1f',
       },

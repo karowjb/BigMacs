@@ -39,7 +39,8 @@ _axios.interceptors.response.use(
   }
 );
 
-Plugin.install = function(Vue) {//possibly add options parameter
+Plugin.install = function(Vue, options) {
+  options;
   Vue.axios = _axios;
   window.axios = _axios;
   Object.defineProperties(Vue.prototype, {
