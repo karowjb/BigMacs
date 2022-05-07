@@ -13,10 +13,10 @@ type JsonTopKickerFG struct {
 	Message string        `json:"message"`
 	Data    []TopKickerFG `json:"data"`
 }
-type JsonTopKickerK struct {
+type JsonTopKickerLongestFG struct {
 	Type    string       `json:"type"`
 	Message string       `json:"message"`
-	Data    []TopKickerK `json:"data"`
+	Data    []TopKickerLongestFG `json:"data"`
 }
 
 type JsonSearchResult struct {

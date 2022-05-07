@@ -64,15 +64,20 @@ type KickerSeason struct {
 type TopKickerFG struct {
 	First_name             string `json:"kickerfirstname"`
 	Last_name              string `json:"kickerlastname"`
-	Fieldgoals_attempts    int    `json:"fieldgoalsattempts"`
-	Fieldgoals_made        int    `json:"fieldgoals_made"`
+	Jersey_number		   int    `json:"jerseynum"`
+	Team_id                string `json:"teamid"`
+	Team_name			   string `json:"teamname"`
+	Team_location          string `json:"teamlocation"`
+	Fieldgoals_made        int    `json:"fieldgoalsmade"`
+	Fieldgoal_longest	   int    `json:"longestfieldgoal"`
 	Season_year            int    `json:"seasonyear"`
-	Kickoffs_endzone       int    `json:"kickoffsendzone"`
-	Kickoffs_inside_twenty int    `json:"kickoffsinsidetwenty"`
-	Games_played           int    `json:"gamesplayed"`
-	Games_started          int    `json:"gamesstarted"`
+	// Kickoffs_endzone       int    `json:"kickoffsendzone"`
+	// Kickoffs_inside_twenty int    `json:"kickoffsinsidetwenty"`
+	// Games_played           int    `json:"gamesplayed"`
+	// Games_started          int    `json:"gamesstarted"`
+	
 }
-type TopKickerK struct {
+type TopKickerLongestFG struct {
 	First_name             string `json:"kickerfirstname"`
 	Last_name              string `json:"kickerlastname"`
 	Kickoffs               int    `json:"kickoffs"`

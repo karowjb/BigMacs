@@ -13,7 +13,7 @@
 <script>
 import axios from 'axios';
 const fgURL = 'http://localhost:8000/toptenfg';
-const syURL = 'http://localhost:8000/toptenyardage';
+const lfgURL = 'http://localhost:8000/toptenyardage';
 const epmURL = 'http://localhost:8000/toptenepm';
 
 export default ({
@@ -22,19 +22,19 @@ export default ({
         return { 
             tabs: [
                 {name: 'Field Goals Made'},
-                {name: 'Single Yardage'},
+                {name: 'Longest Field Goal'},
                 {name: 'Extra Points Made'}
             ],
             tables: [],
             headers: [
-                { text: '#', sortable: false, value: 'index'},
+                { text: '#', align: 'center', sortable: false, value: 'index'},
                 { text: 'Name', align: 'start', sortable: false, value: 'name' },
-                { text: 'Jersey Number', sortable: false, value: 'jerseyNum' },
+                { text: 'Jersey Number', align: 'center', sortable: false, value: 'jerseyNum' },
                 { text: 'Team (Current)', sortable: false, value: 'team' },
-                { text: 'Field Goals Made', sortable: false, value: 'fieldGoals' },
-                { text: 'Single Yardage (yd)', sortable: false, value: 'yardage' },
+                { text: 'Field Goals Made', align: 'center', sortable: false, value: 'fieldGoals' },
+                { text: 'Longest Field Goal (yd)', align: 'center', sortable: false, value: 'longest' },
                 { text: 'Extra Points Made', sortable: false, value: 'extraPoints' },
-                { text: 'Year', sortable: false, value: 'year' },
+                { text: 'Year', align: 'center', sortable: false, value: 'year' },
             ]
         }
     },
@@ -50,10 +50,10 @@ export default ({
                 let newData = {
                     'index': index,
                     'name': entry.kickerfirstname + ' ' + entry.kickerlastname,
-                    'jerseyNum': 'Loading...',
-                    'team': 'Loading...',
-                    'fieldGoals': entry.fieldgoals_made,
-                    'yardage': 'Loading...',
+                    'jerseyNum': entry.jerseynum,
+                    'team': entry.teamlocation + ' ' + entry.teamname,
+                    'fieldGoals': entry.fieldgoalsmade,
+                    'longest': entry.longestfieldgoal,
                     'extraPoints': 'Loading...',
                     'year': entry.seasonyear
                 }
@@ -62,12 +62,28 @@ export default ({
             });
             console.log(fgtable);
             this.tables.push(fgtable);
-            console.log(this.tables)
 
             //get table by single yardage
-            const response2 = await axios.post(syURL);
-            let sytable = response2.data.data;
-            this.tables.push(sytable);
+            const response2 = await axios.post(lfgURL);
+            let respTable2 = response2.data.data;
+            let lfgtable = [];
+            console.log(respTable2);
+            index = 1;
+            respTable2.forEach(entry => {
+                let newData = {
+                    'index': index,
+                    'name': entry.kickerfirstname + ' ' + entry.kickerlastname,
+                    'jerseyNum': entry.jerseynum,
+                    'team': entry.teamlocation + ' ' + entry.teamname,
+                    'fieldGoals': entry.fieldgoalsmade,
+                    'longest': 'Loading...',
+                    'extraPoints': 'Loading...',
+                    'year': entry.seasonyear
+                }
+                lfgtable.push(newData);
+                ++index;
+            });
+            this.tables.push(lfgtable);
 
             //get tables by estra points made
             const response3 = await axios.post(epmURL);

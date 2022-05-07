@@ -35,7 +35,7 @@ func main() {
 
 	//Router request paths
 	router.HandleFunc("/toptenfg", GetTopTenFG).Methods(http.MethodPost, http.MethodOptions)
-	router.HandleFunc("/toptenyardage", GetTopTenK).Methods(http.MethodPost, http.MethodOptions)
+	router.HandleFunc("/toptenlongestfg", GetTopTenLongestFG).Methods(http.MethodPost, http.MethodOptions)
 	router.HandleFunc("/searchplayers", GetPlayer).Methods(http.MethodPost, http.MethodOptions)
 	router.HandleFunc("/probfieldgoal", GetProbabilityFieldgoal).Methods(http.MethodPost, http.MethodOptions)
 	router.HandleFunc("/probkickoff", GetProbabilityKickoff).Methods(http.MethodPost, http.MethodOptions)
@@ -126,14 +126,14 @@ func GetAllKickers(w http.ResponseWriter, r *http.Request) {
 
 }
 func GetTopTenFG(w http.ResponseWriter, r *http.Request) {
-	//This will query the database and return a json response of the kickers that are the top 10 preformers based on a specific criteria
+	//This will query the database and return a json response of the kickers that are the top 10 performers based on a specific criteria
 	ctx := context.Background()
 	err := db.PingContext(ctx)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	tsql := "SELECT TOP 10 first_name, last_name, fieldgoals_attempts,fieldgoals_made,season_year, kickoffs_endzone, kickoffs_inside_twenty,games_played, games_started FROM Kickers INNER JOIN KickerSeason ON Kickers.kicker_id = KickerSeason.kicker_id ORDER BY fieldgoals_made DESC;"
+	tsql := "SELECT TOP 10 first_name, last_name, jersey_number, k.team_id, team_name, team_location, fieldgoals_made, fieldgoal_longest, season_year FROM Kickers k JOIN KickerSeason ks ON ks.kicker_id = k.kicker_id JOIN Teams t ON t.team_id = k.team_id ORDER BY fieldgoals_made DESC;"
 	rows, err := db.QueryContext(ctx, tsql)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -143,7 +143,7 @@ func GetTopTenFG(w http.ResponseWriter, r *http.Request) {
 	var players []model.TopKickerFG
 	for rows.Next() {
 		var p model.TopKickerFG
-		rows.Scan(&p.First_name, &p.Last_name, &p.Fieldgoals_attempts, &p.Fieldgoals_made, &p.Season_year, &p.Kickoffs_endzone, &p.Kickoffs_inside_twenty, &p.Games_played, &p.Games_started)
+		rows.Scan(&p.First_name, &p.Last_name, &p.Jersey_number, &p.Team_id, &p.Team_name, &p.Team_location, &p.Fieldgoals_made, &p.Fieldgoal_longest, &p.Season_year)
 		players = append(players, p)
 	}
 	w.Header().Set("Content-Type", "application/json")
@@ -159,24 +159,24 @@ func GetTopTenFG(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func GetTopTenK(w http.ResponseWriter, r *http.Request) {
-	//This will query the database and return a json response of the kickers that are the top 10 preformers based on a specific criteria
+func GetTopTenLongestFG(w http.ResponseWriter, r *http.Request) {
+	//This will query the database and return a json response of the kickers that are the top 10 performers based on a specific criteria
 	ctx := context.Background()
 	err := db.PingContext(ctx)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	tsql := "SELECT TOP 10 first_name, last_name, kickoffs, kickoffs_yards, season_year, kickoffs_endzone, kickoffs_inside_twenty,games_played, games_started FROM Kickers INNER JOIN KickerSeason ON Kickers.kicker_id = KickerSeason.kicker_id ORDER BY kickoffs_yards DESC;"
+	tsql := "SELECT TOP 10 first_name, last_name, jersey_number, k.team_id, team_name, team_location, fieldgoals_made, season_year, kickoffs_endzone, kickoffs_inside_twenty, games_played, games_started FROM Kickers k JOIN KickerSeason ks ON ks.kicker_id = k.kicker_id JOIN Teams t ON t.team_id = k.team_id ORDER BY fieldgoals_made DESC;"
 	rows, err := db.QueryContext(ctx, tsql)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	defer rows.Close()
-	var players []model.TopKickerK
+	var players []model.TopKickerLongestFG
 	for rows.Next() {
-		var p model.TopKickerK
+		var p model.TopKickerLongestFG
 		rows.Scan(&p.First_name, &p.Last_name, &p.Kickoffs, &p.Kickoffs_yards, &p.Season_year, &p.Kickoffs_endzone, &p.Kickoffs_inside_twenty, &p.Games_played, &p.Games_started)
 		players = append(players, p)
 	}
@@ -185,7 +185,7 @@ func GetTopTenK(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS, POST")
 	w.WriteHeader(http.StatusOK)
-	resp := model.JsonTopKickerK{Type: "Success", Message: "", Data: players}
+	resp := model.JsonTopKickerLongestFG{Type: "Success", Message: "", Data: players}
 	err = json.NewEncoder(w).Encode(resp)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
