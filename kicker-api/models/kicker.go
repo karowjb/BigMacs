@@ -61,21 +61,6 @@ type KickerSeason struct {
 	Xp_blocked               int    `json:"xpblocked"`
 }
 
-// type TopKickerFG struct {
-// 	First_name             string `json:"kickerfirstname"`
-// 	Last_name              string `json:"kickerlastname"`
-// 	Jersey_number		   int    `json:"jerseynum"`
-// 	Team_id                string `json:"teamid"`
-// 	Team_name			   string `json:"teamname"`
-// 	Team_location          string `json:"teamlocation"`
-// 	Fieldgoals_made        int    `json:"fieldgoalsmade"`
-// 	Fieldgoal_longest	   int    `json:"longestfieldgoal"`
-// 	Season_year            int    `json:"seasonyear"`
-// 	// Kickoffs_endzone       int    `json:"kickoffsendzone"`
-// 	// Kickoffs_inside_twenty int    `json:"kickoffsinsidetwenty"`
-// 	// Games_played           int    `json:"gamesplayed"`
-// 	// Games_started          int    `json:"gamesstarted"`
-// }
 type TopKickers struct {
 	First_name             string `json:"kickerfirstname"`
 	Last_name              string `json:"kickerlastname"`
@@ -111,10 +96,18 @@ type PlayerProfile struct {
 }
 
 type SelectedPlayer struct {
+	Kicker_id           string `json:"kickerid"`
 	First_name          string `json:"kickerfirstname"`
 	Last_name           string `json:"kickerlastname"`
+	Height				int	   `json:"kickerheight"`
+	Weight				int    `json:"kickerweight"`
+	Team_id             string `json:"kickerteamid"`
+	Team_name           string `json:"kickerteamname"`
+	Team_location		string `json:"kickerteamlocation"`
+	Team_home_stadium   string `json:"kickerteamhomestadium"`
+	Team_primary		string `json:"kickerteamprimary"`
+	Team_secondary      string `json:"kickerteamsecondary"`
 	Kickoffs            int    `json:"kickoffs"`
-	Kickoffs_squibs     int    `json:"kickoffssquibs"`
 	Fieldgoals_attempts int    `json:"fieldgoalsattempts"`
 	Fieldgoals_made     int    `json:"fieldgoals_made"`
 	Fieldgoal_yards     int    `json:"fieldgoalyards"`
@@ -151,14 +144,14 @@ type KickerInfo struct {
 	Player_status string `json:"playerstatus"`
 }
 
-type GetPlayer struct {
+type DBSearch struct {
 	First_name string `json:"kickerfirstname"`
 	Last_name  string `json:"kickerlastname"`
 	Team_id string `json:"kickerteamid"`
-	HeightMin int `json:"kickerheightmin"`
-	HeightMax int `json:"kickerheightmax"`
-	WeightMin int `json:"kickerweightmin"`
-	WeightMax int `json:"kickerweightmax"`
+	Height_min int `json:"kickerheightmin"`
+	Height_max int `json:"kickerheightmax"`
+	Weight_min int `json:"kickerweightmin"`
+	Weight_max int `json:"kickerweightmax"`
 }
 type GetParameters struct {
 	Fieldgoals_made int `json:"fieldgoals_made"`

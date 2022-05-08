@@ -5,10 +5,10 @@
     <v-container>
       <v-row>
         <v-col cols="6">
-          <SearchInput></SearchInput>
+          <SearchInput @search="search"></SearchInput>
         </v-col>
         <v-col>
-          <SearchOutput></SearchOutput>
+          <SearchOutput searchResults=this.newSearch></SearchOutput>
         </v-col>
       </v-row>
     </v-container>
@@ -16,9 +16,12 @@
 </span>
 </template>
 <script>
+import axios from 'axios';
 import PageHeader from "@/components/PageHeader.vue";
 import SearchInput from "@/components/SearchInput.vue";
 import SearchOutput from "@/components/SearchOutput.vue";
+
+const searchURL = '/searchplayers';
 
 export default {
   name: "Search",
@@ -27,5 +30,27 @@ export default {
     SearchInput,
     SearchOutput
   },
+  data() {
+    return {
+      newSearch: {},
+    }
+  },
+  methods: {
+    search(search) {
+        //api request to search with parameters
+        try {
+          axios.post(searchURL, search).then((response) => {
+            let outputTable = response.data.data;
+            console.log(outputTable);
+            this.newSearch = outputTable;
+          }, (error) => {
+            console.log(error);
+          });
+        } catch(e) {
+          console.log(e);
+        }
+      
+    }
+  }
 };
 </script>

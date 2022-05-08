@@ -71,8 +71,8 @@
               ></v-text-field>
             </template>
         </v-range-slider>
-        <v-btn v-on:click="searchdb" color="green darken-1" id="searchbtn">Search</v-btn>
-        <v-btn v-on:click="resetInputs" color="amber">Reset</v-btn>
+        <v-btn v-on:click="searchdb" color="green darken-1" class='btn'>Search</v-btn>
+        <v-btn v-on:click="resetInputs" color="amber" class='btn'>Reset</v-btn>
       </v-form>
     </v-card-text>
   </v-card>
@@ -99,27 +99,22 @@ export default {
   },
   methods: {
     searchdb() {
+      let fname = this.fname.trim();
+      let lname = this.lname.trim();
       let newSearch = {
-        'kickerteamid': this.team,
-        'kickerfirstname': this.fname,
-        'kickerlastname': this.lname,
+        'kickerfirstname': fname,
+        'kickerlastname': lname,
+        'kickerteamid': '',
         'kickerheightmin': this.heightRange[0],
         'kickerheightmax': this.heightRange[1],
         'kickerweightmin': this.weightRange[0],
         'kickerweightmax': this.weightRange[1],
       }
-      if (this.fname.trim().length() != 0) {
-        newSearch.kickerfirstname = this.fname;
+      if (this.teamNames.indexOf(this.team) != 0) {
+        let x = this.teamNames.indexOf(this.team) - 1;
+        newSearch.kickerteamid = this.teams[x].teamid;
       }
-      if (this.lname.trim().length() != 0) {
-        newSearch.kickerlastname = this.lname;
-      }
-      if (this.team != this.teamNames[0]) {
-        let index = this.teamNames.indexOf(this.team) - 1;
-        newSearch.kickerteamid = this.teams[index].Team_id;
-      }
-
-
+      this.$emit('search', newSearch);
     },
     resetInputs() {
       this.team = this.teamNames[0];
@@ -145,7 +140,9 @@ export default {
 }
 </script>
 <style scoped>
-#searchbtn {
+.btn {
+  margin-top: 16px;
   margin-right: 16px;
 }
+
 </style>
