@@ -39,11 +39,11 @@ export default ({
             console.log("Changed");
             let results = [];
             this.searchResults.forEach(v => {
-                let height = inToFt(v.kickerheight);
+                // let height = inToFt(v.kickerheight);
                 let newData = {
                     'id': v.kickerid,
                     'name': v.kickerfirstname + ' ' + v.kickerlastname,
-                    'height': height,
+                    'height': v.kickerheight,
                     'weight': v.kickerweight,
                     'teamId': v.kickerteamid,
                     'teamName': v.kickerteamlocation + ' ' + v.kickerteamname,
