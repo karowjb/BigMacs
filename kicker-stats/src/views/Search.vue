@@ -8,7 +8,7 @@
           <SearchInput @search="search"></SearchInput>
         </v-col>
         <v-col>
-          <SearchOutput searchResults=this.newSearch></SearchOutput>
+          <SearchOutput :searchResults=this.newSearch></SearchOutput>
         </v-col>
       </v-row>
     </v-container>

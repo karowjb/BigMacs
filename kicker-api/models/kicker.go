@@ -109,7 +109,7 @@ type SelectedPlayer struct {
 	Team_secondary      string `json:"kickerteamsecondary"`
 	Kickoffs            int    `json:"kickoffs"`
 	Fieldgoals_attempts int    `json:"fieldgoalsattempts"`
-	Fieldgoals_made     int    `json:"fieldgoals_made"`
+	Fieldgoals_made     int    `json:"fieldgoalsmade"`
 	Fieldgoal_yards     int    `json:"fieldgoalyards"`
 	Fieldgoal_longest   int    `json:"fieldgoallongest"`
 	Xp_attempts         int    `json:"xpattempts"`
