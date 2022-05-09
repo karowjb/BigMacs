@@ -3,9 +3,8 @@
         <HomeHero></HomeHero>
         <div class="paragraph">
             <h2 class="text-h4 font-weight-bold text-center">A REVOLUTIONARY STATISTICS EXPERIENCE BUILT WITH REAL DATA</h2>
-            <p class="text-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Purus viverra accumsan in nisl nisi scelerisque eu. Sed ullamcorper morbi tincidunt ornare massa eget. Mauris commodo quis imperdiet massa tincidunt. Id velit ut tortor pretium. Egestas erat imperdiet sed euismod nisi. Proin libero nunc consequat interdum varius. Felis imperdiet proin fermentum leo vel orci. Viverra aliquet eget sit amet tellus cras adipiscing. Amet nisl purus in mollis. In egestas erat imperdiet sed euismod nisi porta lorem mollis.
-
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Purus viverra accumsan in nisl nisi scelerisque eu. Sed ullamcorper morbi tincidunt ornare massa eget. Mauris commodo quis imperdiet massa tincidunt. Id velit ut tortor pretium. Egestas erat imperdiet sed euismod nisi. Proin libero nunc consequat interdum varius. Felis imperdiet proin fermentum leo vel orci. Viverra aliquet eget sit amet tellus cras adipiscing. Amet nisl purus in mollis. In egestas erat imperdiet sed euismod nisi porta lorem mollis.
+            <p class="text-p">
+                The Game Changer is the home for anything NFL Kicker statistics related. Whether you are wondering where the soccer ball is in this version of “football” or are watching NFL Redzone for 10 hours every Sunday during the season, there is a page on this site for you. Need to know if the kicker on your significant other’s favorite team is any good? Just look him up! Take a gander at the Top 10 page to see how this kicker stacks up to others. Need to find a kicker for your fantasy football team? Look no further than the Top 10 page. Anxious about a last second kick during a timeout? Head on over to the probabilities page to see whether your anxiety is justified. What are you waiting for? Go look up some stats on your favorite kicker today!
             </p>
         </div>
     </span>

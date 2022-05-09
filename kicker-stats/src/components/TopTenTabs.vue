@@ -30,7 +30,7 @@ export default ({
                 { text: '#', align: 'center', sortable: false, value: 'index'},
                 { text: 'Name', align: 'start', sortable: false, value: 'name' },
                 { text: 'Jersey Number', align: 'center', sortable: false, value: 'jerseyNum' },
-                { text: 'Team (Current)', sortable: false, value: 'team' },
+                { text: 'Team With', sortable: false, value: 'team' },
                 { text: 'Field Goals Made', align: 'center', sortable: false, value: 'fieldGoalsMade' },
                 { text: 'Longest Field Goal (yd)', align: 'center', sortable: false, value: 'longestFG' },
                 { text: 'Kickoffs Into Endzone', align: 'center', sortable: false, value: 'kickoffsEndzone' },
