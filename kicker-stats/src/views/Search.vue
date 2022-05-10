@@ -39,6 +39,7 @@ export default {
     search(search) {
         //api request to search with parameters
         try {
+
           axios.post(searchURL, search).then((response) => {
             let outputTable = response.data.data;
             console.log(outputTable);
@@ -50,7 +51,7 @@ export default {
           console.log(e);
         }
       
-    }
+    },
   }
 };
 </script>

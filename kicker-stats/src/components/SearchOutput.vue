@@ -5,32 +5,34 @@
             :headers="searchHeaders"
             :items="players"
             :items-per-page="10"
-            :single-expand="singleExpand"
+            :single-expand=false
             :expanded.sync="expanded"
             item-key="id"
             show-expand>
             <template v-slot:expanded-item="{ headers, item }">
-                <td :colspan="headers.length">More info about {{ item.name }}
+                <td :colspan="headers.length">
+                    <SearchOutputExpanded :player=item></SearchOutputExpanded>
                 </td>
             </template>
         </v-data-table>
     </v-card-text>
-  </v-card>
+    </v-card>
 </template>
 <script>
-
-//get results from api
+import SearchOutputExpanded from '@/components/SearchOutputExpanded.vue';
 
 export default ({
     name: "SearchOutput",
+    components: { SearchOutputExpanded },
     data() {
         return {
             searchHeaders: [
                 { text: 'Name', align: 'start', value: 'name' },
-                { text: 'Team', value: 'team'},
+                { text: 'Team', value: 'teamName'},
                 { text: 'Jersey Number', value: 'jerseyNum'}
             ],
             players: [],
+            expanded: [],
         }
     },
     props: ['searchResults'],
@@ -39,11 +41,13 @@ export default ({
             console.log("Changed");
             let results = [];
             this.searchResults.forEach(v => {
-                // let height = inToFt(v.kickerheight);
+                let height = v.kickerheight;
+                let formatHeight = Math.floor(height/12)+"'"+height%12+'"';
                 let newData = {
                     'id': v.kickerid,
                     'name': v.kickerfirstname + ' ' + v.kickerlastname,
-                    'height': v.kickerheight,
+                    'jerseyNum': v.jerseynum,
+                    'height': formatHeight,
                     'weight': v.kickerweight,
                     'teamId': v.kickerteamid,
                     'teamName': v.kickerteamlocation + ' ' + v.kickerteamname,

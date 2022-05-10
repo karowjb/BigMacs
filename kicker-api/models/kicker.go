@@ -99,6 +99,7 @@ type SelectedPlayer struct {
 	Kicker_id           string `json:"kickerid"`
 	First_name          string `json:"kickerfirstname"`
 	Last_name           string `json:"kickerlastname"`
+	Jersey_number		int    `json:"jerseynum"`
 	Height				int	   `json:"kickerheight"`
 	Weight				int    `json:"kickerweight"`
 	Team_id             string `json:"kickerteamid"`

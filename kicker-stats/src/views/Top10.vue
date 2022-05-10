@@ -1,6 +1,6 @@
 <template>
 <span>
-  <PageHeader header="- TOP 10 -"></PageHeader>
+  <PageHeader header="- Top 10 -"></PageHeader>
   <div class='mainbg'>
     <v-container>
       <TopTenTabs></TopTenTabs>
