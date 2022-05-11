@@ -10,7 +10,7 @@
             item-key="id"
             show-expand>
             <template v-slot:expanded-item="{ headers, item }">
-                <td :colspan="headers.length">
+                <td :colspan="headers.length" :style="{background: 'linear-gradient(180deg, '+item.teamPrimaryColor+' 0%, '+item.teamSecondaryColor+' 100%)'}">
                     <SearchOutputExpanded :player=item></SearchOutputExpanded>
                 </td>
             </template>
@@ -38,8 +38,13 @@ export default ({
     props: ['searchResults'],
     watch: {
         searchResults: function() {
-            console.log("Changed");
+            // console.log("Changed");
             let results = [];
+            if (Object.keys(this.searchResults).length === 0) {
+                this.players = [];
+                this.expanded = [];
+                return;
+            }
             this.searchResults.forEach(v => {
                 let height = v.kickerheight;
                 let formatHeight = Math.floor(height/12)+"'"+height%12+'"';
@@ -65,8 +70,8 @@ export default ({
                 results.push(newData);
             })
             this.players = results;
-            console.log(results)
-            console.log(this.players);
+            // console.log(results)
+            // console.log(this.players);
         },
     },
 })

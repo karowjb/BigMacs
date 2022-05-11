@@ -1,15 +1,20 @@
 <template>
-<v-card id='expandedCardBG' flat>
+<v-card style="backgroundColor: red" id='expandedCardBG' flat>
     <v-card class='expandedCard' flat>
         <v-card-text>
             <v-row>
-                <v-col cols='4'>Height: {{player.height}}</v-col>
-                <v-col cols='4'>Weight: {{player.weight}} lb.</v-col>
-                <v-col cols='4'>Home: {{player.teamHomeStadium}}</v-col>
+                <v-col cols='4'>Height:<br>{{player.height}}</v-col>
+                <v-col cols='4'>Weight:<br>{{player.weight}} lb.</v-col>
+                <v-col cols='4'>Home:<br>{{player.teamHomeStadium}}</v-col>
             </v-row>
             <v-row>
-                <v-col cols='4'>Kickoffs: {{player.kickoffs}}</v-col>
-                <v-col cols='4'>Fieldgoal Attempts: {{player.fieldgoalAttempts}}</v-col>
+                <v-col cols='4'>Kickoffs:<br>{{player.kickoffs}}</v-col>
+                <v-col cols='4'>Fieldgoal Attempts:<br>{{player.fieldgoalAttempts}}</v-col>
+                <v-col cols='4'>Fieldgoals Made:<br>{{player.fieldgoalsMade}}</v-col>
+            </v-row>
+            <v-row>
+                <v-col cols='4'>Total Fieldgoal Yards:<br>{{player.fieldgoalYards}} yd</v-col>
+                <v-col cols='4'>Longest Fieldgoal:<br>{{player.fieldgoalLongest}} yd</v-col>
             </v-row>
         </v-card-text>
     </v-card>
@@ -26,10 +31,6 @@ export default ({
     props: {
         player: {},
     },
-    mounted() {
-        let bg = document.getElementById('expandedCardBG');
-        bg.style.background = 'linear-gradient(180deg, '+this.player.teamPrimaryColor+' 0%, '+this.player.teamSecondaryColor+' 100%)';
-    }
 })
 </script>
 <style scoped>

@@ -114,6 +114,7 @@ export default {
         let x = this.teamNames.indexOf(this.team) - 1;
         newSearch.kickerteamid = this.teams[x].teamid;
       }
+      this.$emit('resetOutput', false);
       this.$emit('search', newSearch);
     },
     resetInputs() {
@@ -122,6 +123,8 @@ export default {
       this.lname = '';
       this.heightRange = [48, 100];
       this.weightRange = [150, 300];
+      this.reset = true;
+      this.$emit('resetOutput', true);
     },
   },
   async created() {
