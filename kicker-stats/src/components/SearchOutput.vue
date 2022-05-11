@@ -38,7 +38,6 @@ export default ({
     props: ['searchResults'],
     watch: {
         searchResults: function() {
-            // console.log("Changed");
             let results = [];
             if (Object.keys(this.searchResults).length === 0) {
                 this.players = [];
@@ -70,8 +69,6 @@ export default ({
                 results.push(newData);
             })
             this.players = results;
-            // console.log(results)
-            // console.log(this.players);
         },
     },
 })
