@@ -57,6 +57,6 @@ export default ({
   --main-accent: #399c59;
 }
 .mainbg {
-  background-image: linear-gradient(180deg, rgba(1,35,37,1) 0%, rgba(236,235,241,1) 100%);
+  background-image: linear-gradient(180deg, rgba(1,35,37,1) 0%, rgba(255,255,255,1) 100%);
 }
 </style>

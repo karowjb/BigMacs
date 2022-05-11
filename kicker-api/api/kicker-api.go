@@ -234,7 +234,11 @@ func GetPlayer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	//edit tsql depending on parameters entered
+<<<<<<< HEAD
 	tsql := "SELECT k.kicker_id, first_name, last_name, player_height, player_weight, k.team_id, t.team_name, t.team_location, t.home_stadium, t.primary_color, t.secondary_color, SUM(kickoffs) kickoffs, SUM(fieldgoals_attempts) fieldgoals_attempts, SUM(fieldgoals_made) fieldgoals_made, SUM(fieldgoal_yards) fieldgoal_yards, MAX(fieldgoal_longest) fieldgoal_longest, SUM(xp_attempts) xp_attempts, SUM(xp_made) xp_made FROM Kickers k INNER JOIN KickerSeason ks ON k.kicker_id = ks.kicker_id JOIN Teams t ON t.team_id = k.team_id WHERE k.player_height BETWEEN " + strconv.Itoa(player.Height_min) + " AND " + strconv.Itoa(player.Height_max) + " AND k.player_weight BETWEEN " + strconv.Itoa(player.Weight_min) + " AND " + strconv.Itoa(player.Weight_max)
+=======
+	tsql := "SELECT k.kicker_id, first_name, last_name, jersey_number, player_height, player_weight, k.team_id, t.team_name, t.team_location, t.home_stadium, t.primary_color, t.secondary_color, SUM(kickoffs) kickoffs, SUM(fieldgoals_attempts) fieldgoals_attempts, SUM(fieldgoals_made) fieldgoals_made, SUM(fieldgoal_yards) fieldgoal_yards, MAX(fieldgoal_longest) fieldgoal_longest, SUM(xp_attempts) xp_attempts, SUM(xp_made) xp_made FROM Kickers k INNER JOIN KickerSeason ks ON k.kicker_id = ks.kicker_id JOIN Teams t ON t.team_id = k.team_id WHERE k.player_height BETWEEN "+strconv.Itoa(player.Height_min)+" AND "+strconv.Itoa(player.Height_max)+" AND k.player_weight BETWEEN "+strconv.Itoa(player.Weight_min)+" AND "+strconv.Itoa(player.Weight_max)
+>>>>>>> 86434aac2954ca2ddea1aa518976de08e6e00c33
 	if len(player.First_name) != 0 {
 		tsql = tsql + " AND first_name = '" + player.First_name + "'"
 	}
@@ -244,7 +248,7 @@ func GetPlayer(w http.ResponseWriter, r *http.Request) {
 	if len(player.Team_id) != 0 {
 		tsql = tsql + " AND k.team_id = '" + player.Team_id + "'"
 	}
-	tsql = tsql + "GROUP BY k.kicker_id, first_name, last_name, player_height, player_weight, k.team_id, t.team_name, t.team_location, t.home_stadium, t.primary_color, t.secondary_color;"
+	tsql = tsql + "GROUP BY k.kicker_id, first_name, last_name, jersey_number, player_height, player_weight, k.team_id, t.team_name, t.team_location, t.home_stadium, t.primary_color, t.secondary_color;"
 	// tsql := fmt.Sprintf("SELECT first_name,last_name,kickoffs,kickoffs_squibs,fieldgoals_attempts,fieldgoals_made,fieldgoals_blocked,fieldgoal_yards,fieldgoal_longest,xp_attempts,xp_made FROM Kickers INNER JOIN KickerSeason ON Kickers.kicker_id = KickerSeason.kicker_id WHERE Kickers.first_name ='%s' AND Kickers.last_name='%s';", player.First_name, player.Last_name)
 	rows, err := db.QueryContext(ctx, tsql)
 	if err != nil {
@@ -254,9 +258,15 @@ func GetPlayer(w http.ResponseWriter, r *http.Request) {
 	defer rows.Close()
 	var topkickers []model.SelectedPlayer
 	for rows.Next() {
+<<<<<<< HEAD
 		var kicker model.SelectedPlayer
 		rows.Scan(&kicker.Kicker_id, &kicker.First_name, &kicker.Last_name, &kicker.Height, &kicker.Weight, &kicker.Team_id, &kicker.Team_name, &kicker.Team_location, &kicker.Team_home_stadium, &kicker.Team_primary, &kicker.Team_secondary, &kicker.Kickoffs, &kicker.Fieldgoals_attempts, &kicker.Fieldgoals_made, &kicker.Fieldgoal_yards, &kicker.Fieldgoal_longest, &kicker.Xp_attempts, &kicker.Xp_made)
 		topkickers = append(topkickers, kicker)
+=======
+		var player model.SelectedPlayer
+		rows.Scan(&player.Kicker_id, &player.First_name, &player.Last_name, &player.Jersey_number, &player.Height, &player.Weight, &player.Team_id, &player.Team_name, &player.Team_location, &player.Team_home_stadium, &player.Team_primary, &player.Team_secondary, &player.Kickoffs, &player.Fieldgoals_attempts, &player.Fieldgoals_made, &player.Fieldgoal_yards, &player.Fieldgoal_longest, &player.Xp_attempts, &player.Xp_made)
+		players = append(players, player)
+>>>>>>> 86434aac2954ca2ddea1aa518976de08e6e00c33
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Headers", "*")

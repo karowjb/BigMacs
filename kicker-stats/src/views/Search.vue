@@ -5,7 +5,7 @@
     <v-container>
       <v-row>
         <v-col cols="6">
-          <SearchInput @search="search"></SearchInput>
+          <SearchInput @search="search" @resetOutput="resetOutput"></SearchInput>
         </v-col>
         <v-col>
           <SearchOutput :searchResults=this.newSearch></SearchOutput>
@@ -41,7 +41,7 @@ export default {
         try {
           axios.post(searchURL, search).then((response) => {
             let outputTable = response.data.data;
-            console.log(outputTable);
+            // console.log(outputTable);
             this.newSearch = outputTable;
           }, (error) => {
             console.log(error);
@@ -50,6 +50,13 @@ export default {
           console.log(e);
         }
       
+    },
+    resetOutput(r) {
+      if (r == true) {
+        this.newSearch = {};
+        console.log(this.newSearch);
+
+      }
     }
   }
 };
