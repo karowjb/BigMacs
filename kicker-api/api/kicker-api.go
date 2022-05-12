@@ -325,17 +325,25 @@ func GetProbabilityKickoff(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	tsql := fmt.Sprintf("SELECT kickoffs, kickoffs_inside_twenty, kickoffs_return_yards, kickoffs_touchbacks,kickoffs_yards,kickoffs_out_of_bounds, kickoffs_onside_attempts, kickoffs_onside_success, kickoffs_squibs, season_year, season_type FROM KickerSeason INNER JOIN Kickers ON KickerSeason.kicker_id = Kickers.kicker_id WHERE first_name = '%s' AND last_name = '%s';", played.First_name, played.Last_name)
+	// tsql := fmt.Sprintf("SELECT kickoffs, kickoffs_inside_twenty, kickoffs_return_yards, kickoffs_touchbacks,kickoffs_yards,kickoffs_out_of_bounds, kickoffs_onside_attempts, kickoffs_onside_success, kickoffs_squibs, season_year, season_type FROM KickerSeason INNER JOIN Kickers ON KickerSeason.kicker_id = Kickers.kicker_id WHERE first_name = '%s' AND last_name = '%s';", played.First_name, played.Last_name)
+	tsql := fmt.Sprintf("SELECT SUM(fieldgoals_attempts) AS FieldGoalAttempts, SUM(fieldgoals_made) AS FieldGoalsMade,SUM(kickoffs_yards) AS TotalYards, sum(kickoffs) AS TotalKickoffs FROM KickerSeason INNER JOIN Kickers ON KickerSeason.kicker_id = Kickers.kicker_id WHERE kicker_id = '%s';", played.Kicker_id)
+
 	rows, err := db.QueryContext(ctx, tsql)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	defer rows.Close()
-	var kickers []model.KickerKickoff
+	// var kickers []model.KickerKickoff
+	// for rows.Next() {
+	// 	var kicker model.KickerKickoff
+	// 	rows.Scan(&kicker.Kickoffs, &kicker.Kickoffs_endzone, &kicker.Kickoffs_inside_twenty, &kicker.Kickoffs_return_yards, &kicker.Kickoffs_return_yards, &kicker.Kickoffs_touchbacks, &kicker.Kickoffs_yards, &kicker.Kickoffs_out_of_bounds, &kicker.Kickoffs_onside_attempts, &kicker.Kickoffs_onside_success, &kicker.Kickoffs_squibs)
+	// 	kickers = append(kickers, kicker)
+	// }
+	var kickers []model.AllProbability
 	for rows.Next() {
-		var kicker model.KickerKickoff
-		rows.Scan(&kicker.Kickoffs, &kicker.Kickoffs_endzone, &kicker.Kickoffs_inside_twenty, &kicker.Kickoffs_return_yards, &kicker.Kickoffs_return_yards, &kicker.Kickoffs_touchbacks, &kicker.Kickoffs_yards, &kicker.Kickoffs_out_of_bounds, &kicker.Kickoffs_onside_attempts, &kicker.Kickoffs_onside_success, &kicker.Kickoffs_squibs)
+		var kicker model.AllProbability
+		rows.Scan(&kicker.Total_fieldgoals_attempts, &kicker.Total_fieldgoals_made, &kicker.Total_kickoffs_attempts, &kicker.Total_kickoffs_yards)
 		kickers = append(kickers, kicker)
 	}
 	w.Header().Set("Content-Type", "application/json")
@@ -343,7 +351,7 @@ func GetProbabilityKickoff(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS, POST")
 	w.WriteHeader(http.StatusOK)
-	resp := model.JsonKickoffStats{Type: "Success", Message: "", Data: kickers}
+	resp := model.JsonProbabilityResponse{Type: "Success", Message: "", Data: kickers}
 	err = json.NewEncoder(w).Encode(resp)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

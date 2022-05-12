@@ -9,15 +9,10 @@ type JsonTeam struct {
 	Data    []Team `json:"data"`
 }
 type JsonTopKickers struct {
-	Type    string        `json:"type"`
-	Message string        `json:"message"`
+	Type    string       `json:"type"`
+	Message string       `json:"message"`
 	Data    []TopKickers `json:"data"`
 }
-// type JsonTopKickerLongestFG struct {
-// 	Type    string       `json:"type"`
-// 	Message string       `json:"message"`
-// 	Data    []TopKickerLongestFG `json:"data"`
-// }
 
 type JsonSearchResult struct {
 	Type    string           `json:"type"`
@@ -47,4 +42,9 @@ type JsonResponseAllKickers struct {
 	Type    string       `json:"type"`
 	Message string       `json:"message"`
 	Data    []KickerInfo `json:"data"`
+}
+type JsonProbabilityResponse struct {
+	Type    string           `json:"type"`
+	Message string           `json:"message"`
+	Data    []AllProbability `json:"data"`
 }
