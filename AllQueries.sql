@@ -13,7 +13,6 @@ CREATE TABLE Teams (
     secondary_color VARCHAR(500),
     PRIMARY KEY (team_id)
 )
-​
 CREATE TABLE Kickers (
     first_name VARCHAR(500),
     last_name VARCHAR(500),
@@ -32,21 +31,16 @@ CREATE TABLE Kickers (
     PRIMARY KEY (kicker_id),
     FOREIGN KEY (team_id) REFERENCES Teams(team_id)
 )
-​
 CREATE TABLE KickerSeason (
     season_id VARCHAR(500),
     kicker_id VARCHAR(500),
     team_id VARCHAR(500),
-​
     season_year INT,
     season_type VARCHAR(100),
-​
     games_played INT,
     games_started INT,
-​
     penalties INT,
     penalty_yards INT,
-​
     kickoffs INT,
     kickoffs_endzone INT,
     kickoffs_inside_twenty INT,
@@ -57,17 +51,14 @@ CREATE TABLE KickerSeason (
     kickoffs_onside_attempts INT,
     kickoffs_onside_success INT,
     kickoffs_squibs INT,
-​
     fieldgoals_attempts INT,
     fieldgoals_made INT,
     fieldgoals_blocked INT,
     fieldgoal_yards INT,
     fieldgoal_longest INT,
-​
     xp_attempts INT,
     xp_made INT,
     xp_blocked INT,
-​
     FOREIGN KEY (kicker_id) REFERENCES Kickers(kicker_id),
     FOREIGN KEY (team_id) REFERENCES Teams(team_id)
 )

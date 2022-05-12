@@ -10,29 +10,60 @@
                 ></v-select>
                 <v-btn v-on:click="searchProb" color="green darken-1">Calculate</v-btn>
                 </v-form>
-            <v-card-title class="justify-center">100%</v-card-title>
+            <v-card-title class="justify-center">{{this.probFG}}%</v-card-title>
         </v-card-text>
     </v-card>
 </template>
 <script>
+import axios from 'axios';
+const getKickersURL = 'http://localhost:8000/getkickers';
+const probFGurl = 'http://localhost:8000/get';
+// const probKurl = '';
+
 export default ({
     name: 'ProbabilityInput',
     data() {
         return {
             kicker: '',
             kickerNames: [],
+            kickers: [],
             probFG: 0,
-            probK: 0
+            probK: 0,
         }
     },
     methods: {
         searchProb() {
-            let id = '';
-            if (this.kickerNames.indexOf(this.kicker) != 0) {
-                let x = this.kickerNames.indexOf(this.kicker) - 1;
-                id = this.kickers[x].kickerid;
+            try {
+                let id = '';
+                if (this.kickerNames.indexOf(this.kicker) != 0) {
+                    let x = this.kickerNames.indexOf(this.kicker) - 1;
+                    id = this.kickers[x].kickerid;
+                    console.log(id);
+                } else {
+                    return;
+                }
+                axios.post(probFGurl, id).then((response) => {
+                    let output = response.data.data;
+                    this.probFG = output.fieldgoalsmade/output.fieldgoalattempts;
+                },
+                (error) => {
+                    console.log(error);
+                });
+            } catch (e) {
+             console.log(e);
             }
-            id;
+        }
+    },
+    async created() {
+        try {
+        //get kickers
+        const response = await axios.post(getKickersURL);
+        this.kickers = response.data.data;
+        this.kickers.forEach(kicker => {
+            this.kickerNames.push(kicker.kickerfirstname + ' ' + kicker.kickerlastname);
+        });
+        } catch(e) {
+        console.log(e);
         }
     },
 })

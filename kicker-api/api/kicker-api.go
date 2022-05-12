@@ -5,10 +5,10 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	"strconv"
 	model "kicker-api/models"
 	"log"
 	"net/http"
+	"strconv"
 
 	_ "github.com/denisenkom/go-mssqldb"
 	"github.com/gorilla/mux"
@@ -18,7 +18,7 @@ var db *sql.DB
 var server = "localhost"
 var port = 1433
 var user = "sa"
-//var password = "Interstellar"
+// var password = "Interstellar"
 var password = "Databases22"
 var database = "Kicker_Stats"
 
@@ -43,7 +43,6 @@ func main() {
 	router.HandleFunc("/probkickoff", GetProbabilityKickoff).Methods(http.MethodPost, http.MethodOptions)
 	router.HandleFunc("/getkickers", GetAllKickers).Methods(http.MethodPost, http.MethodOptions)
 	router.HandleFunc("/getteams", GetAllTeams).Methods(http.MethodPost, http.MethodOptions)
-	router.HandleFunc("/test", Test).Methods(http.MethodPost, http.MethodOptions)
 	srv := &http.Server{
 		Addr:    ":8000",
 		Handler: router,
@@ -51,17 +50,12 @@ func main() {
 	if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		log.Fatalf("listen: %s\n", err)
 	}
-	fmt.Println("Connected")
-}
-
-func Test(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("this is a test")
 }
 
 func GetAllTeams(w http.ResponseWriter, r *http.Request) {
+	//Selecting all teams
 	ctx := context.Background()
 	err := db.PingContext(ctx)
-	fmt.Println(err)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -73,18 +67,18 @@ func GetAllTeams(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer rows.Close()
-	var players []model.Team
+	var teams []model.Team
 	for rows.Next() {
-		var p model.Team
-		rows.Scan(&p.Team_name, &p.Team_location, &p.Team_abbr, &p.Team_id, &p.Home_stadium, &p.Home_surface, &p.Home_roof, &p.Division, &p.Conference, &p.Primary_color, &p.Secondary_color)
-		players = append(players, p)
+		var t model.Team
+		rows.Scan(&t.Team_name, &t.Team_location, &t.Team_abbr, &t.Team_id, &t.Home_stadium, &t.Home_surface, &t.Home_roof, &t.Division, &t.Conference, &t.Primary_color, &t.Secondary_color)
+		teams = append(teams, t)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS, POST")
 	w.WriteHeader(http.StatusOK)
-	resp := model.JsonTeam{Type: "Success", Message: "", Data: players}
+	resp := model.JsonTeam{Type: "Success", Message: "", Data: teams}
 	err = json.NewEncoder(w).Encode(resp)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -93,9 +87,9 @@ func GetAllTeams(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetAllKickers(w http.ResponseWriter, r *http.Request) {
+	// Returns all kickers
 	ctx := context.Background()
 	err := db.PingContext(ctx)
-	fmt.Println(err)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -108,18 +102,18 @@ func GetAllKickers(w http.ResponseWriter, r *http.Request) {
 	}
 	defer rows.Close()
 
-	var players []model.KickerInfo
+	var kickers []model.KickerInfo
 	for rows.Next() {
-		var p model.KickerInfo
-		rows.Scan(&p.Kicker_id, &p.First_name, &p.Last_name, &p.Jersey_number, &p.Player_status)
-		players = append(players, p)
+		var k model.KickerInfo
+		rows.Scan(&k.Kicker_id, &k.First_name, &k.Last_name, &k.Jersey_number, &k.Player_status)
+		kickers = append(kickers, k)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS, POST")
 	w.WriteHeader(http.StatusOK)
-	resp := model.JsonResponseAllKickers{Type: "Success", Message: "", Data: players}
+	resp := model.JsonResponseAllKickers{Type: "Success", Message: "", Data: kickers}
 	err = json.NewEncoder(w).Encode(resp)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -142,18 +136,18 @@ func GetTopTenFG(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer rows.Close()
-	var players []model.TopKickers
+	var topkickers []model.TopKickers
 	for rows.Next() {
-		var p model.TopKickers
-		rows.Scan(&p.First_name, &p.Last_name, &p.Jersey_number, &p.Team_id, &p.Team_name, &p.Team_location, &p.Fieldgoals_made, &p.Fieldgoal_longest, &p.Kickoffs_endzone, &p.Season_year)
-		players = append(players, p)
+		var tk model.TopKickers
+		rows.Scan(&tk.First_name, &tk.Last_name, &tk.Jersey_number, &tk.Team_id, &tk.Team_name, &tk.Team_location, &tk.Fieldgoals_made, &tk.Fieldgoal_longest, &tk.Kickoffs_endzone, &tk.Season_year)
+		topkickers = append(topkickers, tk)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS, POST")
 	w.WriteHeader(http.StatusOK)
-	resp := model.JsonTopKickers{Type: "Success", Message: "", Data: players}
+	resp := model.JsonTopKickers{Type: "Success", Message: "", Data: topkickers}
 	err = json.NewEncoder(w).Encode(resp)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -176,18 +170,18 @@ func GetTopTenLongestFG(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer rows.Close()
-	var players []model.TopKickers
+	var topkickers []model.TopKickers
 	for rows.Next() {
-		var p model.TopKickers
-		rows.Scan(&p.First_name, &p.Last_name, &p.Jersey_number, &p.Team_id, &p.Team_name, &p.Team_location, &p.Fieldgoals_made, &p.Fieldgoal_longest, &p.Kickoffs_endzone, &p.Season_year)
-		players = append(players, p)
+		var tk model.TopKickers
+		rows.Scan(&tk.First_name, &tk.Last_name, &tk.Jersey_number, &tk.Team_id, &tk.Team_name, &tk.Team_location, &tk.Fieldgoals_made, &tk.Fieldgoal_longest, &tk.Kickoffs_endzone, &tk.Season_year)
+		topkickers = append(topkickers, tk)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS, POST")
 	w.WriteHeader(http.StatusOK)
-	resp := model.JsonTopKickers{Type: "Success", Message: "", Data: players}
+	resp := model.JsonTopKickers{Type: "Success", Message: "", Data: topkickers}
 	err = json.NewEncoder(w).Encode(resp)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -209,18 +203,18 @@ func GetTopTenEndzoneK(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer rows.Close()
-	var players []model.TopKickers
+	var topkickers []model.TopKickers
 	for rows.Next() {
-		var p model.TopKickers
-		rows.Scan(&p.First_name, &p.Last_name, &p.Jersey_number, &p.Team_id, &p.Team_name, &p.Team_location, &p.Fieldgoals_made, &p.Fieldgoal_longest, &p.Kickoffs_endzone, &p.Season_year)
-		players = append(players, p)
+		var tk model.TopKickers
+		rows.Scan(&tk.First_name, &tk.Last_name, &tk.Jersey_number, &tk.Team_id, &tk.Team_name, &tk.Team_location, &tk.Fieldgoals_made, &tk.Fieldgoal_longest, &tk.Kickoffs_endzone, &tk.Season_year)
+		topkickers = append(topkickers, tk)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS, POST")
 	w.WriteHeader(http.StatusOK)
-	resp := model.JsonTopKickers{Type: "Success", Message: "", Data: players}
+	resp := model.JsonTopKickers{Type: "Success", Message: "", Data: topkickers}
 	err = json.NewEncoder(w).Encode(resp)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -229,7 +223,7 @@ func GetTopTenEndzoneK(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetPlayer(w http.ResponseWriter, r *http.Request) {
-	//Gets a specific player and returns there stats and information as a json response
+	// Selects a player by firstname and lastname
 	ctx := context.Background()
 	err := db.PingContext(ctx)
 	if err != nil {
@@ -242,37 +236,35 @@ func GetPlayer(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	//edit tsql depending on parameters entered
-	tsql := "SELECT k.kicker_id, first_name, last_name, jersey_number, player_height, player_weight, k.team_id, t.team_name, t.team_location, t.home_stadium, t.primary_color, t.secondary_color, SUM(kickoffs) kickoffs, SUM(fieldgoals_attempts) fieldgoals_attempts, SUM(fieldgoals_made) fieldgoals_made, SUM(fieldgoal_yards) fieldgoal_yards, MAX(fieldgoal_longest) fieldgoal_longest, SUM(xp_attempts) xp_attempts, SUM(xp_made) xp_made FROM Kickers k INNER JOIN KickerSeason ks ON k.kicker_id = ks.kicker_id JOIN Teams t ON t.team_id = k.team_id WHERE k.player_height BETWEEN "+strconv.Itoa(player.Height_min)+" AND "+strconv.Itoa(player.Height_max)+" AND k.player_weight BETWEEN "+strconv.Itoa(player.Weight_min)+" AND "+strconv.Itoa(player.Weight_max)
+	tsql := "SELECT k.kicker_id, first_name, last_name, jersey_number, player_height, player_weight, k.team_id, t.team_name, t.team_location, t.home_stadium, t.primary_color, t.secondary_color, SUM(kickoffs) kickoffs, SUM(fieldgoals_attempts) fieldgoals_attempts, SUM(fieldgoals_made) fieldgoals_made, SUM(fieldgoal_yards) fieldgoal_yards, MAX(fieldgoal_longest) fieldgoal_longest, SUM(xp_attempts) xp_attempts, SUM(xp_made) xp_made FROM Kickers k INNER JOIN KickerSeason ks ON k.kicker_id = ks.kicker_id JOIN Teams t ON t.team_id = k.team_id WHERE k.player_height BETWEEN " + strconv.Itoa(player.Height_min) + " AND " + strconv.Itoa(player.Height_max) + " AND k.player_weight BETWEEN " + strconv.Itoa(player.Weight_min) + " AND " + strconv.Itoa(player.Weight_max)
 	if len(player.First_name) != 0 {
-		tsql = tsql + " AND first_name = '"+player.First_name+"'"
+		tsql = tsql + " AND first_name = '" + player.First_name + "'"
 	}
 	if len(player.Last_name) != 0 {
-		tsql = tsql + " AND last_name = '"+player.Last_name+"'"
+		tsql = tsql + " AND last_name = '" + player.Last_name + "'"
 	}
 	if len(player.Team_id) != 0 {
-		tsql = tsql + " AND k.team_id = '"+player.Team_id+"'"
+		tsql = tsql + " AND k.team_id = '" + player.Team_id + "'"
 	}
 	tsql = tsql + "GROUP BY k.kicker_id, first_name, last_name, jersey_number, player_height, player_weight, k.team_id, t.team_name, t.team_location, t.home_stadium, t.primary_color, t.secondary_color;"
-	// tsql := fmt.Sprintf("SELECT first_name,last_name,kickoffs,kickoffs_squibs,fieldgoals_attempts,fieldgoals_made,fieldgoals_blocked,fieldgoal_yards,fieldgoal_longest,xp_attempts,xp_made FROM Kickers INNER JOIN KickerSeason ON Kickers.kicker_id = KickerSeason.kicker_id WHERE Kickers.first_name ='%s' AND Kickers.last_name='%s';", player.First_name, player.Last_name)
 	rows, err := db.QueryContext(ctx, tsql)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	defer rows.Close()
-	var players []model.SelectedPlayer
+	var topkickers []model.SelectedPlayer
 	for rows.Next() {
 		var player model.SelectedPlayer
 		rows.Scan(&player.Kicker_id, &player.First_name, &player.Last_name, &player.Jersey_number, &player.Height, &player.Weight, &player.Team_id, &player.Team_name, &player.Team_location, &player.Team_home_stadium, &player.Team_primary, &player.Team_secondary, &player.Kickoffs, &player.Fieldgoals_attempts, &player.Fieldgoals_made, &player.Fieldgoal_yards, &player.Fieldgoal_longest, &player.Xp_attempts, &player.Xp_made)
-		players = append(players, player)
+		topkickers = append(topkickers, player)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS, POST")
 	w.WriteHeader(http.StatusOK)
-	resp := model.JsonSearchResult{Type: "Success", Message: "", Data: players}
+	resp := model.JsonSearchResult{Type: "Success", Message: "", Data: topkickers}
 	err = json.NewEncoder(w).Encode(resp)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -281,7 +273,7 @@ func GetPlayer(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetProbabilityFieldgoal(w http.ResponseWriter, r *http.Request) {
-	//Will take a player and then take their stats and calculate the probability of them making a field goal based on number of success / number of attempts
+	// Gets the fieldgoal information for the selected kicker
 	ctx := context.Background()
 	err := db.PingContext(ctx)
 	if err != nil {
@@ -301,18 +293,18 @@ func GetProbabilityFieldgoal(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer rows.Close()
-	var players []model.KickerFieldGoal
+	var kickers []model.KickerFieldGoal
 	for rows.Next() {
-		var player model.KickerFieldGoal
-		rows.Scan(&player.Fieldgoals_attempts, &player.Fieldgoals_made, &player.Season_year, &player.Season_type)
-		players = append(players, player)
+		var kicker model.KickerFieldGoal
+		rows.Scan(&kicker.Fieldgoals_attempts, &kicker.Fieldgoals_made, &kicker.Season_year, &kicker.Season_type)
+		kickers = append(kickers, kicker)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS, POST")
 	w.WriteHeader(http.StatusOK)
-	resp := model.JsonFieldgoalStats{Type: "Success", Message: "", Data: players}
+	resp := model.JsonFieldgoalStats{Type: "Success", Message: "", Data: kickers}
 	err = json.NewEncoder(w).Encode(resp)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -341,18 +333,18 @@ func GetProbabilityKickoff(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer rows.Close()
-	var players []model.KickerKickoff
+	var kickers []model.KickerKickoff
 	for rows.Next() {
-		var player model.KickerKickoff
-		rows.Scan(&player.Kickoffs, &player.Kickoffs_endzone, &player.Kickoffs_inside_twenty, &player.Kickoffs_return_yards, &player.Kickoffs_return_yards, &player.Kickoffs_touchbacks, &player.Kickoffs_yards, &player.Kickoffs_out_of_bounds, &player.Kickoffs_onside_attempts, &player.Kickoffs_onside_success, &player.Kickoffs_squibs)
-		players = append(players, player)
+		var kicker model.KickerKickoff
+		rows.Scan(&kicker.Kickoffs, &kicker.Kickoffs_endzone, &kicker.Kickoffs_inside_twenty, &kicker.Kickoffs_return_yards, &kicker.Kickoffs_return_yards, &kicker.Kickoffs_touchbacks, &kicker.Kickoffs_yards, &kicker.Kickoffs_out_of_bounds, &kicker.Kickoffs_onside_attempts, &kicker.Kickoffs_onside_success, &kicker.Kickoffs_squibs)
+		kickers = append(kickers, kicker)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS, POST")
 	w.WriteHeader(http.StatusOK)
-	resp := model.JsonKickoffStats{Type: "Success", Message: "", Data: players}
+	resp := model.JsonKickoffStats{Type: "Success", Message: "", Data: kickers}
 	err = json.NewEncoder(w).Encode(resp)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
