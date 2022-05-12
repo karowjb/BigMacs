@@ -32,7 +32,7 @@ func main() {
 	}
 	// Handle api requests
 	router := mux.NewRouter()
-	fmt.Println("connected to router")
+	fmt.Println("Welcome to the KickerAPI")
 
 	//Router request paths
 	router.HandleFunc("/toptenfg", GetTopTenFG).Methods(http.MethodPost, http.MethodOptions)
