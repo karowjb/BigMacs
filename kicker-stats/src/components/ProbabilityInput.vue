@@ -17,14 +17,14 @@
 <script>
 import axios from 'axios';
 const getKickersURL = 'http://localhost:8000/getkickers';
-const probFGurl = 'http://localhost:8000/get';
+const probabilitiesURL = 'http://localhost:8000/getprobabilities';
 // const probKurl = '';
 
 export default ({
     name: 'ProbabilityInput',
     data() {
         return {
-            kicker: '',
+            kicker: {},
             kickerNames: [],
             kickers: [],
             probFG: 0,
@@ -42,9 +42,13 @@ export default ({
                 } else {
                     return;
                 }
-                axios.post(probFGurl, id).then((response) => {
-                    let output = response.data.data;
-                    this.probFG = output.fieldgoalsmade/output.fieldgoalattempts;
+                axios.post(probabilitiesURL, id).then((response) => {
+                    this.kicker = response.data.data;
+
+                    this.probFG = this.kicker.fieldgoalsmade/this.kicker.fieldgoalattempts;
+                    this.probK = this.kickerkickoffyards/this.kicker.kickoffs;
+                    console.log(this.probFG + '%');
+                    console.log(this.probK);
                 },
                 (error) => {
                     console.log(error);
