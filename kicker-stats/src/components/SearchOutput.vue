@@ -32,7 +32,7 @@
 <script>
 import SearchOutputExpanded from "@/components/SearchOutputExpanded.vue";
 
-export default {
+export default ({
   name: "SearchOutput",
   components: { SearchOutputExpanded },
   data() {
@@ -81,6 +81,6 @@ export default {
       });
       this.players = results;
     },
-  },
-};
+  }
+})
 </script>
