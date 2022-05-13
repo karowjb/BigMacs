@@ -20,6 +20,7 @@ var port = 1433
 var user = "sa"
 // var password = "Interstellar"
 var password = "Databases22"
+// var database = "KickerStats";
 var database = "Kicker_Stats"
 
 func main() {
@@ -40,7 +41,7 @@ func main() {
 	router.HandleFunc("/toptenkintoendzone", GetTopTenEndzoneK).Methods(http.MethodPost, http.MethodOptions)
 	router.HandleFunc("/searchplayers", GetPlayer).Methods(http.MethodPost, http.MethodOptions)
 	router.HandleFunc("/probfieldgoal", GetProbabilityFieldgoal).Methods(http.MethodPost, http.MethodOptions)
-	router.HandleFunc("/probkickoff", GetProbabilityKickoff).Methods(http.MethodPost, http.MethodOptions)
+	router.HandleFunc("/probabilities", GetProbabilityKickoff).Methods(http.MethodPost, http.MethodOptions)
 	router.HandleFunc("/getkickers", GetAllKickers).Methods(http.MethodPost, http.MethodOptions)
 	router.HandleFunc("/getteams", GetAllTeams).Methods(http.MethodPost, http.MethodOptions)
 	srv := &http.Server{
