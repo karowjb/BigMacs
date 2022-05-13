@@ -47,6 +47,6 @@ This page is split into 3 categories that a kicker could be Top 10 in: Field Goa
 
 ![fg_made](sample_pictures/top10_fgmade.png)
 
-![longest_fg](sample_pictures/longestfg.png)
+![longest_fg](sample_pictures/top10_longestfg.png)
 
-![endzone](sample_pictures/endzone.png)
+![endzone](sample_pictures/top10_endzone.png)
