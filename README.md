@@ -37,3 +37,16 @@ npm run serve
 ```
 
 This will start the website on localhost port 8080 by default (this could change depending on if another process is running on this port). 
+
+After these two steps, the website should be running.
+
+## Pages
+
+### Top 10
+This page is split into 3 categories that a kicker could be Top 10 in: Field Goals Made, Longest Field Goal, and Kickoffs into the Endzone:
+
+![fg_made](sample_pictures/top10_fgmade.png)
+
+![longest_fg](sample_pictures/longestfg.png)
+
+![endzone](sample_pictures/endzone.png)
