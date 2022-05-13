@@ -1,14 +1,16 @@
 <template>
   <v-app>
-    <app-nav></app-nav>
+    <AppNav></AppNav>
     <v-main>
       <router-view></router-view>
     </v-main>
+    <AppFooter></AppFooter>
   </v-app>
 </template>
 <script>
 import Vue from "vue";
 import AppNav from "@/components/AppNav.vue";
+import AppFooter from "@/components/AppFooter.vue";
 import Vuetify from "vuetify/lib";
 import axios from "axios";
 
@@ -43,6 +45,7 @@ export default {
   name: "App",
   components: {
     AppNav,
+    AppFooter,
   },
   vuetify,
   axios,
