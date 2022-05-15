@@ -160,7 +160,7 @@ type GetParameters struct {
 
 type AllProbability struct {
 	Total_fieldgoals_made     int `json:"totalmadefg"`
-	Total_fieldgoals_attempts int `json:"totalattempsfg"`
+	Total_fieldgoals_attempts int `json:"totalattemptsfg"`
 	Total_kickoffs_attempts   int `json:"totalattemptsk"`
 	Total_kickoffs_yards      int `json:"totalyardsk"`
 }

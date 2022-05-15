@@ -1,7 +1,7 @@
 <template>
   <span>
     <PageHeader header="- Search Database -"></PageHeader>
-    <div class="mainbg">
+    <div class="mainbg extraBotPad">
       <v-container>
         <v-row>
           <v-col cols="12" sm="6">

@@ -328,7 +328,7 @@ func GetProbabilityKickoff(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// tsql := fmt.Sprintf("SELECT kickoffs, kickoffs_inside_twenty, kickoffs_return_yards, kickoffs_touchbacks,kickoffs_yards,kickoffs_out_of_bounds, kickoffs_onside_attempts, kickoffs_onside_success, kickoffs_squibs, season_year, season_type FROM KickerSeason INNER JOIN Kickers ON KickerSeason.kicker_id = Kickers.kicker_id WHERE first_name = '%s' AND last_name = '%s';", played.First_name, played.Last_name)
-	tsql := fmt.Sprintf("SELECT SUM(fieldgoals_attempts) AS FieldGoalAttempts, SUM(fieldgoals_made) AS FieldGoalsMade,SUM(kickoffs_yards) AS TotalYards, sum(kickoffs) AS TotalKickoffs FROM KickerSeason INNER JOIN Kickers ON KickerSeason.kicker_id = Kickers.kicker_id WHERE kicker_id = '%s';", played.Kicker_id)
+	tsql := fmt.Sprintf("SELECT SUM(fieldgoals_attempts) AS FieldGoalAttempts, SUM(fieldgoals_made) AS FieldGoalsMade, SUM(kickoffs) AS TotalKickoffs, SUM(kickoffs_yards) AS TotalYards FROM KickerSeason INNER JOIN Kickers ON KickerSeason.kicker_id = Kickers.kicker_id WHERE Kickers.kicker_id = '%s';", played.Kicker_id)
 
 	rows, err := db.QueryContext(ctx, tsql)
 	if err != nil {
