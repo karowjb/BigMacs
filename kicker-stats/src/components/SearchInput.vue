@@ -14,7 +14,7 @@
           :min="48"
           :max="100"
           color="green darken-1"
-          track-color="primary"
+          track-color="secondary"
           label="Height (in)"
           class="align-center"
           ><template v-slot:prepend>
@@ -45,7 +45,7 @@
           :min="150"
           :max="300"
           color="green darken-1"
-          track-color="primary"
+          track-color="secondary"
           label="Weight (lb)"
           class="align-center"
           ><template v-slot:prepend>

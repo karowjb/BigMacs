@@ -1,7 +1,7 @@
 <template>
 <span>
   <PageHeader header="- Probabilities -"></PageHeader>
-  <div class='mainbg'>
+  <div class='mainbg extraBotPad'>
     <v-container>
       <ProbabilityInput></ProbabilityInput>
     </v-container>

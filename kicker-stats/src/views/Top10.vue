@@ -1,7 +1,7 @@
 <template>
   <span>
     <PageHeader header="- Top 10 -"></PageHeader>
-    <div class="mainbg">
+    <div class="mainbg extraBotPad">
       <v-container>
         <TopTenTabs></TopTenTabs>
       </v-container>

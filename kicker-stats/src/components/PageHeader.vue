@@ -3,7 +3,8 @@
     <v-container class='container' fluid>
     <v-row justify='center' align-text='center'>
         <v-col>
-            <div class="header text-h2 font-weight-bold">{{header}}</div>
+            <div class="header text-h2 font-weight-bold hidden-xs-only">{{header}}</div>
+            <div class="headerSm text-h4 font-weight-bold hidden-sm-and-up">{{header}}</div>
         </v-col>
     </v-row>
     </v-container>
@@ -25,6 +26,10 @@ export default ({
 .header {
     color: white;
     text-shadow: 6px 6px 4px #002d2d;
+}
+.headerSm {
+    color: white;
+    text-shadow: 3px 3px 2px #002d2d;
 }
 
 
