@@ -50,3 +50,16 @@ This page is split into 3 categories that a kicker could be Top 10 in: Field Goa
 ![longest_fg](sample_pictures/top10_longestfg.png)
 
 ![endzone](sample_pictures/top10_endzone.png)
+
+### Search
+
+This page allows you to search for a kicker with search parameters being first and last name, team, height. and weight:
+
+![search_example](sample_pictures/search_example.png)
+
+This returns a kicker with an option for a more detailed view with the background being the team's colors:
+
+![search_details](sample_pictures/search_details.png)
+
+### Probabilities
+
