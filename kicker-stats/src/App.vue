@@ -8,7 +8,6 @@
   </v-app>
 </template>
 <script>
-import Vue from "vue";
 import AppNav from "@/components/AppNav.vue";
 // import AppFooter from "@/components/AppFooter.vue";
 import Vuetify from "vuetify/lib";
@@ -33,13 +32,6 @@ const vuetify = new Vuetify({
     },
   },
 });
-Vue.mixin({
-  methods: {
-    inToFt: function (num) {
-      return Math.floor(num / 12) + "'" + (num % 12) + '"';
-    },
-  },
-});
 
 export default {
   name: "App",
@@ -48,6 +40,9 @@ export default {
   },
   vuetify,
   axios,
+  created() {
+    document.title = "BigMacs Sports Stats";
+  }
 };
 </script>
 <style>

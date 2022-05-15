@@ -49,14 +49,10 @@ export default ({
     methods: {
         searchProb() {
             try {
-                
-                let id = this.kickers[this.kickerNames.indexOf(this.kicker)].kickerid;
-                    // console.log(id);
-                
+                let id = this.kickers[this.kickerNames.indexOf(this.kicker)].kickerid;                
                 let k = {
                     'kickerid' : id
                 }
-                // console.log(k);
                 axios.post(probabilitiesURL, k).then(
                     (response) => {
                     let resp = response.data.data;
@@ -82,7 +78,6 @@ export default ({
                             innerText: this.probFG + '%',
                             round: 100,
                         })
-                        
                     }
                     if (kicker.totalk === 0) {
                         this.validK = false;
@@ -96,8 +91,6 @@ export default ({
                             round: 100,
                         })
                     }
-
-
                 },
                 (error) => {
                     console.log(error);
