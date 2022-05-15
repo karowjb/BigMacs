@@ -4,12 +4,10 @@
     <v-main>
       <router-view></router-view>
     </v-main>
-    <!-- <AppFooter></AppFooter> -->
   </v-app>
 </template>
 <script>
 import AppNav from "@/components/AppNav.vue";
-// import AppFooter from "@/components/AppFooter.vue";
 import Vuetify from "vuetify/lib";
 import axios from "axios";
 
