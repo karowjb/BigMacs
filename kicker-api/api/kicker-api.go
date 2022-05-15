@@ -20,8 +20,10 @@ var port = 1433
 var user = "sa"
 
 // var password = "Interstellar"
-var password = "Interstellar"
-var database = "KickerStats"
+var password = "Databases22"
+
+// var database = "KickerStats";
+var database = "Kicker_Stats"
 
 func main() {
 
@@ -40,7 +42,8 @@ func main() {
 	router.HandleFunc("/toptenlongestfg", GetTopTenLongestFG).Methods(http.MethodPost, http.MethodOptions)
 	router.HandleFunc("/toptenkintoendzone", GetTopTenEndzoneK).Methods(http.MethodPost, http.MethodOptions)
 	router.HandleFunc("/searchplayers", GetPlayer).Methods(http.MethodPost, http.MethodOptions)
-	router.HandleFunc("/probabilities", GetProbability).Methods(http.MethodPost, http.MethodOptions)
+	router.HandleFunc("/probfieldgoal", GetProbabilityFieldgoal).Methods(http.MethodPost, http.MethodOptions)
+	router.HandleFunc("/probabilities", GetProbabilityKickoff).Methods(http.MethodPost, http.MethodOptions)
 	router.HandleFunc("/getkickers", GetAllKickers).Methods(http.MethodPost, http.MethodOptions)
 	router.HandleFunc("/getteams", GetAllTeams).Methods(http.MethodPost, http.MethodOptions)
 	srv := &http.Server{
@@ -272,48 +275,8 @@ func GetPlayer(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// func GetProbabilityFieldgoal(w http.ResponseWriter, r *http.Request) {
-// 	// Gets the fieldgoal information for the selected kicker
-// 	ctx := context.Background()
-// 	err := db.PingContext(ctx)
-// 	if err != nil {
-// 		http.Error(w, err.Error(), http.StatusInternalServerError)
-// 		return
-// 	}
-// 	var played model.Kicker
-// 	err = json.NewDecoder(r.Body).Decode(&played)
-// 	if err != nil {
-// 		http.Error(w, err.Error(), http.StatusInternalServerError)
-// 		return
-// 	}
-// 	tsql := fmt.Sprintf("SELECT fieldgoals_attempts, fieldgoals_made, season_year, season_type FROM KickerSeason INNER JOIN Kickers ON KickerSeason.kicker_id = Kickers.kicker_id WHERE first_name = '%s' AND last_name = '%s';", played.First_name, played.Last_name)
-// 	rows, err := db.QueryContext(ctx, tsql)
-// 	if err != nil {
-// 		http.Error(w, err.Error(), http.StatusInternalServerError)
-// 		return
-// 	}
-// 	defer rows.Close()
-// 	var kickers []model.KickerFieldGoal
-// 	for rows.Next() {
-// 		var kicker model.KickerFieldGoal
-// 		rows.Scan(&kicker.Fieldgoals_attempts, &kicker.Fieldgoals_made, &kicker.Season_year, &kicker.Season_type)
-// 		kickers = append(kickers, kicker)
-// 	}
-// 	w.Header().Set("Content-Type", "application/json")
-// 	w.Header().Set("Access-Control-Allow-Headers", "*")
-// 	w.Header().Set("Access-Control-Allow-Origin", "*")
-// 	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS, POST")
-// 	w.WriteHeader(http.StatusOK)
-// 	resp := model.JsonFieldgoalStats{Type: "Success", Message: "", Data: kickers}
-// 	err = json.NewEncoder(w).Encode(resp)
-// 	if err != nil {
-// 		http.Error(w, err.Error(), http.StatusInternalServerError)
-// 		return
-// 	}
-// }
-
-func GetProbability(w http.ResponseWriter, r *http.Request) {
-	// takes in the information and then returns the sum of attempts, and sum of kicks
+func GetProbabilityFieldgoal(w http.ResponseWriter, r *http.Request) {
+	// Gets the fieldgoal information for the selected kicker
 	ctx := context.Background()
 	err := db.PingContext(ctx)
 	if err != nil {
@@ -326,9 +289,6 @@ func GetProbability(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-<<<<<<< HEAD
-	tsql := fmt.Sprintf("SELECT SUM(fieldgoals_attempts) AS FieldGoalAttempts, SUM(fieldgoals_made) AS FieldGoalsMade,SUM(kickoffs_yards) AS TotalYards, sum(kickoffs) AS TotalKickoffs FROM KickerSeason INNER JOIN Kickers ON KickerSeason.kicker_id = Kickers.kicker_id WHERE Kickers.kicker_id = '%s';", played.Kicker_id)
-=======
 	tsql := fmt.Sprintf("SELECT fieldgoals_attempts, fieldgoals_made, season_year, season_type FROM KickerSeason INNER JOIN Kickers ON KickerSeason.kicker_id = Kickers.kicker_id WHERE first_name = '%s' AND last_name = '%s';", played.First_name, played.Last_name)
 	rows, err := db.QueryContext(ctx, tsql)
 	if err != nil {
@@ -369,9 +329,7 @@ func GetProbabilityKickoff(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	// tsql := fmt.Sprintf("SELECT kickoffs, kickoffs_inside_twenty, kickoffs_return_yards, kickoffs_touchbacks,kickoffs_yards,kickoffs_out_of_bounds, kickoffs_onside_attempts, kickoffs_onside_success, kickoffs_squibs, season_year, season_type FROM KickerSeason INNER JOIN Kickers ON KickerSeason.kicker_id = Kickers.kicker_id WHERE first_name = '%s' AND last_name = '%s';", played.First_name, played.Last_name)
 	tsql := fmt.Sprintf("SELECT SUM(fieldgoals_attempts) AS FieldGoalAttempts, SUM(fieldgoals_made) AS FieldGoalsMade, SUM(kickoffs) AS TotalKickoffs, SUM(kickoffs_yards) AS TotalYards FROM KickerSeason INNER JOIN Kickers ON KickerSeason.kicker_id = Kickers.kicker_id WHERE Kickers.kicker_id = '%s';", played.Kicker_id)
->>>>>>> 20d458ec731c649f7ac96b4ac5e4d481cb6aca2b
 
 	rows, err := db.QueryContext(ctx, tsql)
 	if err != nil {
