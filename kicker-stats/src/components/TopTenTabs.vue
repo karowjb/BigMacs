@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-tabs centered dark>
+    <v-tabs centered center-active dark>
       <v-tab v-for="tab in tabs" :key="tab.name">{{ tab.name }}</v-tab>
       <v-tab-item v-for="table in tables" :key="table.id">
         <v-card flat>
@@ -110,7 +110,6 @@ export default {
       const response3 = await axios.post(kieURL);
       let respTable3 = response3.data.data;
       let kietable = [];
-      console.log(kietable);
       index = 1;
       respTable3.forEach((entry) => {
         let newData = {
@@ -126,7 +125,6 @@ export default {
         kietable.push(newData);
         ++index;
       });
-      console.log(kietable);
       this.tables.push(kietable);
     } catch (e) {
       console.log(e);

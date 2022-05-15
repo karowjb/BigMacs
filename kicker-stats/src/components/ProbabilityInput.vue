@@ -17,7 +17,7 @@
 <script>
 import axios from 'axios';
 const getKickersURL = 'http://localhost:8000/getkickers';
-const probabilitiesURL = 'http://localhost:8000/getprobabilities';
+const probabilitiesURL = 'http://localhost:8000/probabilities';
 // const probKurl = '';
 
 export default ({
@@ -42,7 +42,10 @@ export default ({
                 } else {
                     return;
                 }
-                axios.post(probabilitiesURL, id).then((response) => {
+                let k = {
+                    'kickerid': id
+                }
+                axios.post(probabilitiesURL, k).then((response) => {
                     this.kicker = response.data.data;
 
                     this.probFG = this.kicker.fieldgoalsmade/this.kicker.fieldgoalattempts;
