@@ -13,12 +13,13 @@ import AppNav from "@/components/AppNav.vue";
 import Vuetify from "vuetify/lib";
 import axios from "axios";
 
+import colors from 'vuetify/lib/util/colors'
 const vuetify = new Vuetify({
   theme: {
     themes: {
       light: {
-        primary: "#ecebf1",
-        secondary: "#1f1e1f",
+        primary: colors.green.darken1,
+        secondary: "#ecebf1",
         accent: "#399c59",
         darkgreen: "#003a38",
         error: "#b71c1c",
