@@ -19,11 +19,13 @@ var server = "localhost"
 var port = 1433
 var user = "sa"
 
-// var password = "Interstellar"
-var password = "Databases22"
+var password = "Interstellar"
 
-// var database = "KickerStats";
-var database = "Kicker_Stats"
+// var password = "Databases22"
+
+var database = "KickerStats"
+
+// var database = "Kicker_Stats"
 
 func main() {
 
