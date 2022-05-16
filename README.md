@@ -10,7 +10,7 @@ The database is static with data from the 2021-2022 NFL season. We explored usin
 
 There are three main tables in the database: Teams, Kickers, and Kicker seasons. These three tables all have keys that reference other tables. The main connections are relating a kicker to a team and a kicker season to a kicker.
 
-To add the data to the database, run "AllQueries.sql" against your database. 
+To add the data to a database, run "AllQueries.sql" against your database. 
 
 ## API Calls
 
@@ -63,3 +63,8 @@ This returns a kicker with an option for a more detailed view with the backgroun
 
 ### Probabilities
 
+This page allows a user to input a kicker and get statistics on how likely it is that the kicker will make a field goal. It also gives the average kickoff length for the specific kicker.
+
+![prob_example](sample_pictures/prob_example_2.png)
+
+From the database, this takes into account number of field goals attempted, field goals made, nuber of kickoffs, and total kickoff yards.
